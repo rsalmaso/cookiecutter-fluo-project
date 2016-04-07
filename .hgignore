@@ -1,0 +1,13 @@
+syntax: glob
+.svnignore
+.DS_Store
+.svn
+Thumbs.db
+.directory
+.htpass
+.git
+*.swp
+*~
+*-
+*.pyc
+*.kpf
