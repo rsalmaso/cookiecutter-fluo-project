@@ -1,0 +1,109 @@
+# load global settings
+
+if [ -f /etc/bash.bashrc ]; then
+  . /etc/bash.bashrc
+fi
+
+# generic settings
+
+WHITE="\[\033[0m\]"
+RED="\[\033[0;31m\]"
+GREEN="\[\033[1;32m\]"
+ORANGE="\[\033[1;33m\]"
+BLUE="\[\033[1;34m\]"
+PINK="\[\033[1;35m\]"
+CYAN="\033[36m\033[1m\]"
+YELLOW="\[\033[34m \033[33m\033[1m\]"
+#GREEN="\[\033[1m\033[32m\]"
+
+# Aliases
+alias fetchnews='fetchnews -vvv'
+alias wget='wget -c'
+alias scp='scp -r'
+alias sshr='ssh -l root'
+alias tin='tin -r'
+alias mo='git fetch;git merge origin/$(git -b --no-color | grep \* | cut -d\ -f 2)'
+alias vim='vim -p'
+alias ls='ls --color'
+alias ll='ls -la --color'
+alias top='htop'
+alias ports='sudo lsof -i -P' # List of open ports
+
+export LOCAL=$HOME/local
+export PATH=$LOCAL/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/usr/games:/bin:/sbin
+export PKG_CONFIG_PATH=$LOCAL/lib/pkgconfig
+export MANPATH=$MANPATH:$LOCAL/man
+export PYTHONUSERBASE=$HOME/local
+export LD_LIBRARY_PATH=$LOCAL/lib:/usr/local/lib:$LD_LIBRARY_PATH
+export EDITOR=vim
+export HGRCPATH=$HOME/.local/mercurial/hgrc
+
+# XDG_xxx_DIR 
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_LOCAL_HOME="$HOME/.local"
+
+# vim 
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+
+# VCS prompt
+function trim() { echo $1; }
+function vcs_ps1() {
+    ROOT="`hg root 2> /dev/null`"
+    if [ "$ROOT" != "" ]; then
+        BRANCH="`hg branch 2> /dev/null`"
+        BOOKMARK=`hg bookmarks 2> /dev/null | grep "^\s\*\s" | cut -d " " -f 3`
+        if [ "$BOOKMARK" != "" ]; then
+            BOOKMARK="[${BOOKMARK}]"
+        fi
+        REPO="hg"
+    else
+        ROOT="`git rev-parse --show-toplevel 2> /dev/null`"
+        if [ "$ROOT" != "" ]; then
+            BRANCH="`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`"
+            REPO="git"
+        else
+            echo
+            return
+        fi
+    fi
+    BASENAME="`basename $ROOT 2> /dev/null`"
+    echo "${BASENAME}@${REPO}:${BRANCH}${BOOKMARK} "
+}
+case "$TERM" in
+    xterm-color|xterm|screen)
+        PS1='\033[36m\033[1m\]\t \d\[\033[34m \033[33m\033[1m\]\u@\H \[\033[1m\033[32m\]\w\[\033[1m\]\n\[\033[m\]$(vcs_ps1)$ '
+        ;;
+    *)
+        PS1='\t \d \u@\H \w\n$(vcs_ps1)$ '
+        ;;
+esac
+export PS1
+
+function calc(){ awk "BEGIN{ print $* }" ;}
+function pgw(){ ping $( ip route list 0/0 | awk '{ print $3 }' ); }
+
+# $ cdp twisted.web
+# $ pwd
+# /usr/share/pyshared/twisted/web
+# $ ls
+# _auth/  domhelpers.py  html.py  iweb.py  resource.py
+# [..]
+function cdp () {
+    cd "$(python -c "import os.path as _, ${1}; print _.dirname(_.realpath(${1}.__file__[:-1]))")"
+}
+
+# enable bash completion in interactive shells
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
+# local settings
+
+if [ -f $LOCAL/etc/django_bash_completion ]; then
+  . $LOCAL/etc/django_bash_completion
+fi
+
+if [ -f ~/.local/bash/bashrc ]; then
+  . ~/.local/bash/bashrc
+fi

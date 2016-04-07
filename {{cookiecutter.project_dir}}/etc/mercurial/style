@@ -1,0 +1,35 @@
+wbranch = '{label("log.branch", ifeq(branch, " default", "", " {branch}"))}'
+wcset = '{label("changeset.{phase}", rev)}'
+wuser = '{label("grep.user", author|user)}'
+wtags = '{label("log.tag", if(tags," {tags}"))}'
+wrev = '{label("log.rev", if(rev," {rev}"))}'
+wphase = '{label("log.phase", if(phase,"[{phase}]"))}'
+wbookmarks = '{label("log.bookmark", if(bookmarks," {bookmarks}"))}'
+wabstract = '{label(ifcontains(rev, revset('parents()'), 'desc.here'), desc|firstline)}'
+wdesc = '{label(ifcontains(rev, revset('parents()'), 'desc.here'), desc)}'
+
+start_file_adds = ''
+file_add = '\033[0;32mA {file_add}\033[0m\n'
+end_file_adds = ''
+
+start_file_dels = ''
+file_del = '\033[0;31mR {file_del}\033[0m\n'
+end_file_dels = ''
+
+start_file_mods = ''
+file_mod = '\033[0;36mM {file_mod}\033[0m\n'
+end_file_mods = ''
+
+start_branches = ' '
+branch = '\033[0;35m{branch}\033[0m'
+
+start_bookmarks = ' '
+bookmark = '\033[0;32m[{bookmark}]\033[0m '
+last_bookmark = '\033[0;32m[{bookmark}]\033[0m'
+
+start_tags = ' '
+tag = '\033[0;33m{tag}\033[0m, '
+last_tag = '\033[0;33m{tag}\033[0m'
+
+changeset = 'changeset: \033[0;31m{wphase}\033[0m \033[0;33m{rev}\033[0m : \033[0;33m{node|short}\033[0m{wbranch}{bookmarks}{tags}\nnode:      \033[0;33m{node}\033[0m\nauthor:    {author}\ndate:      {date|rfc822date} ({date|age})\nsummary:   {desc}\n\n'
+changeset_verbose = '{changeset}{file_mods}{file_adds}{file_dels}\n\n'

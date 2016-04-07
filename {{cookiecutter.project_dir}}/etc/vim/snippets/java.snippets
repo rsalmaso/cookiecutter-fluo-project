@@ -1,0 +1,196 @@
+snippet main
+	public static void main(String[] args) {
+	    ${1:/* code */}
+	}
+snippet pu
+	public 
+snippet po
+	protected 
+snippet pr
+	private 
+snippet st
+	static 
+snippet fi
+	final 
+snippet ab
+	abstract
+snippet re
+	return
+snippet br
+	break;
+snippet de
+	default:
+	    ${1}
+snippet ca
+	} catch (${1:Exception} ${2:e}) {
+	    ${3}
+	}
+snippet th
+	throw ${1:Exception};${2}
+snippet sy
+	synchronized 
+snippet im
+	import ${1:package};${2}
+snippet imp
+	implements ${1:Abstract}
+snippet ext
+	extends ${1:Parent}
+snippet j.u
+	java.util
+snippet j.i
+	java.io.
+snippet j.b
+	java.beans.
+snippet j.n
+	java.net.
+snippet j.m
+	java.math.
+snippet .
+	this.
+snippet if
+	if (${1:true}) {
+	    ${2:/* code */}
+	}
+snippet el
+	} else {
+	    ${1:/* code */}
+snippet elif
+	} else if (${1:true}) {
+	    ${2:/* code */}
+	}
+snippet wh
+	while (${1}) {
+	    ${2:/* code */}
+	}
+snippet for
+	for (${1}; ${2}; ${3}) {
+	    ${4:/* code */}
+	}
+snippet fore
+	for (${1} : ${2}) {
+	    ${3:/* code */}
+	}
+snippet sw
+	switch (${1}) {
+	    ${2}
+	}
+snippet cs
+	case ${1}:
+	    ${2}
+	${3}
+snippet tc
+	public class ${1:`Filename()`} extends ${2:TestCase}
+snippet t
+	public void test${1:Name}() throws Exception ${2}
+snippet cl
+	class ${1:`Filename("", "untitled")`} ${2}
+snippet icl
+	class ${1:ClassName} implements ${2:objects} {
+	    ${3}
+	}
+snippet ecl
+	class ${1:ClassName} extends ${2:objects} {
+	    ${3}
+	}
+snippet in
+	interface ${1:`Filename("", "untitled")`} ${2:extends Parent}${3}
+snippet m
+	${1:void} ${2:method}(${3}) ${4:throws } {
+	    ${5}
+	}
+snippet v
+	${1:String} ${2:var}${3: = null}${4};${5}
+snippet co
+	static public final ${1:String} ${2:var} = ${3};${4}
+snippet as
+	assert ${1:test} : "${2:Failure message}";${3}
+snippet try
+	try {
+	    ${3}
+	} catch (${1:Exception} ${2:e}) {
+	}
+snippet tryf
+	try {
+	    ${3}
+	} catch (${1:Exception} ${2:e}) {
+	} finally {
+	}
+snippet (
+	( ${1}, )${2}
+snippet [
+	[ ${1}, ]${2}
+snippet {
+	{ ${1} }${2}
+snippet d
+	{ ${1}: ${2}, }${3}
+snippet ,
+	${1}, ${2}
+snippet rst
+	ResultSet ${1:rst}${2: = null}${3};${4}
+snippet out
+	System.out.println(${1});${2}
+snippet mit
+	/*
+	 * Copyright (C) 2007-2010, Salmaso Raffaele <raffaele@salmaso.org>
+	 *
+	 * Permission is hereby granted, free of charge, to any person obtaining a copy
+	 * of this software and associated documentation files (the "Software"), to deal
+	 * in the Software without restriction, including without limitation the rights
+	 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	 * copies of the Software, and to permit persons to whom the Software is
+	 * furnished to do so, subject to the following conditions:
+	 *
+	 * The above copyright notice and this permission notice shall be included in
+	 * all copies or substantial portions of the Software.
+	 *
+	 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+	 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	 * THE SOFTWARE.
+	 */
+snippet bsd
+	/*
+	 * Copyright (C) 2007-2010, Salmaso Raffaele <raffaele@salmaso.org>
+	 *
+	 * Redistribution and use in source and binary forms, with or without
+	 * modification, are permitted provided that the following conditions are met:
+	 *
+	 *  1. Redistributions of source code must retain the above copyright notice,
+	 *     this list of conditions and the following disclaimer.
+	 *  2. Redistributions in binary form must reproduce the above copyright
+	 *     notice, this list of conditions and the following disclaimer in the
+	 *     documentation and/or other materials provided with the distribution.
+	 *
+	 * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+	 * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+	 * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+	 * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE
+	 * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+	 * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+	 * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+	 * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+	 * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+	 * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+	 * POSSIBILITY OF SUCH DAMAGE.
+	 */
+snippet gpl
+	/*
+	 * Copyright (C) 2007-2010, Salmaso Raffaele <raffaele@salmaso.org>
+	 *
+	 * This program is free software; you can redistribute it and/or modify
+	 * it under the terms of the GNU General Public License as published by
+	 * the Free Software Foundation; either version 2 of the License, or
+	 * (at your option) any later version.
+	 *
+	 * This program is distributed in the hope that it will be useful,
+	 * but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	 * GNU General Public License for more details.
+	 *
+	 * You should have received a copy of the GNU General Public License along
+	 * with this program; if not, write to the Free Software Foundation, Inc.,
+	 * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+	 */

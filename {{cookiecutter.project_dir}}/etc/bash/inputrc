@@ -1,0 +1,10 @@
+set match-hidden-files off
+
+set input-meta on
+set convert-meta on
+
+set output-meta on
+
+set show-all-if-ambiguous on
+set completion-ignore-case on
+set completion-map-case on

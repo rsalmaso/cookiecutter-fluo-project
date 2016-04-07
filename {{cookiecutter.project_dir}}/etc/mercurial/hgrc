@@ -1,0 +1,102 @@
+[ui]
+style = $HOME/.local/mercurial/style
+
+[web]
+style = monoblue
+allow_archive = bz2 gz zip
+cacerts = /etc/ssl/certs/ca-certificates.crt
+
+[diff]
+git = true
+
+[extensions]
+hgext.schemes =
+hgext.convert = 
+hgext.mq =
+hgext.strip =
+hgext.bookmarks =
+hgext.purge =
+hgext.patchbomb =
+hgext.color = 
+hgext.pager = 
+hgext.record = 
+hgext.rebase =
+hgext.churn =
+hgext.gpg =
+hgext.fetch =
+hgext.progress =
+hgext.relink =
+hgext.hgk =
+hgext.histedit =
+hgext.children =
+hgext.shelve =
+hggit =
+evolve = $HOME/.local/mercurial/evolve/hgext/evolve.py
+topic = $HOME/.local/mercurial/topic-experiment/hgext3rd/topic
+
+[pager]
+attend = log, ldiff, diff, in, incoming, out, outgoing, blog, sblog, bllog, mlog, glog, rlog, slog, llog, logp, shelve, unshelve, this, local, ls, sl, status, sstatus, annotate, boutgoing, bincoming, bout, bin, uoutgoing, uincoming, uout, uin, blame, wip, lwip
+pager = less -RFX
+
+[alias]
+ldiff = log --patch --limit 1
+origin = paths default
+bpush = push bitbucket
+bpull = pull bitbucket
+boutgoing = outgoing --graph bitbucket
+bincoming = incoming --graph bitbucket
+upush = push upstream
+upull = pull upstream
+uoutgoing = outgoing --graph upstream
+uincoming = incoming --graph upstream
+gpush = push github
+gpull = pull github
+goutgoing = outgoing --graph github
+gincoming = incoming --graph github
+outgoing = outgoing --graph
+incoming = incoming --graph
+lastlog = log --limit 1
+sstatus = status -mard
+tagged = log -r 'first($1:: and tagged())'
+compare = log -r "ancestors('$1') and not ancestors('$2')"
+this = log --graph --verbose -r 'reverse(::.)'
+local = log -r 'reverse(::.) and not public()'
+ls = !if [ -n "$1" ]; then r="$1/tip"; else r=.; fi; $HG log -r "(::$r and not public()) + parents(::$r and not public())" --template "{label('changeset.{phase}', '{rev}|{node|short}')} {label('tags.normal', ifeq(tags, '', '', ifeq(tags, 'tip', '', '{tags}\n ')))} {desc|firstline} {label('tags.normal', ifeq(branch, '', '', ifeq(branch, 'default', '', '{branch}\n ')))} {label('tags.normal', bookmarks)}\n"
+sl = ls
+backup = export -r 'not public()'
+mlog = log --graph --template "{node|short} {desc}"
+rlog = log
+glog = log --graph
+slog = log --graph
+sblog = log --graph --follow --rev $1
+logp = log --graph --patch
+log = log --graph --verbose
+llog = log --graph --patch --verbose
+blog = log --graph --verbose --follow --rev $1
+bllog = log --graph --patch --verbose --follow --rev $1
+wip = log --graph --rev=wip
+lwip = log --graph --patch --rev=wip
+blame = annotate --number --changeset --user
+crecord = commit --interactive
+changes = diff --stat -r tip-1
+emptycommit = !touch .empty-commit-tmp ; $HG add .empty-commit-tmp ; $HG commit .empty-commit-tmp -m "<enter commit message>" ; $HG rm .empty-commit-tmp ; $HG commit .empty-commit-tmp --amend "$@"
+
+[experimental]
+crecord = true
+
+[changelog]
+filename = CHANGES
+
+[ftp]
+global_tags = True
+
+[mq]
+# Enable secret phase integration.
+# This integration is off by default for backward compatibility.
+secret = true
+
+[phases]
+publish = False
+
+[revsetalias]
+wip = (parents(not public()) or not public() or . or head()) and (not obsolete() or unstable()^) and not closed()

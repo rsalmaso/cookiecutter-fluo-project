@@ -1,0 +1,207 @@
+" Make vim respect the XDG base directory spec.
+" .swp files
+set directory=.,$XDG_CACHE_HOME/vim,~/,/tmp
+" .bak files
+set backupdir=.,$XDG_CACHE_HOME/vim,~/,/tmp
+" .viminfo file
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+" .vim runtime directory
+set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
+let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
+let g:netrw_home=expand("$XDG_CACHE_HOME/vim")
+
+" Source a vimrc from git project root
+ 
+let project_root = system("git rev-parse --show-toplevel")
+" System commands seem to have a trailing newline, so lets get rid of that
+let chomped_project_root = project_root[:-2]
+let project_vimrc = chomped_project_root."/.vimrc"
+if filereadable(project_vimrc)
+  execute "source" project_vimrc
+endif
+
+" set encoding as UTF-8
+set encoding=utf8
+colorscheme evening
+" keep a backup file
+set backup
+" make all windows the same size when adding/removing windows
+set ea
+" 
+set sb
+" set the filename in the title
+set title
+"
+"set mouse=a
+" hide mouse pointer when typing
+set mousef
+"
+"set mousem=popup
+set mouse=ni
+" visual blink instead of beep
+set vb
+" tabspace
+set ts=4
+"
+set shiftwidth=4
+"
+set expandtab
+"
+set softtabstop=4
+"
+set nowrap
+" automatically show matching brackets
+set showmatch
+" set auto-indent on
+set autoindent
+" make backspace key works the way it should
+set backspace=indent,eol,start
+" alternate tab completition
+set wildmode=longest,list:longest,list:full
+" syntax highlighting on
+syntax on
+" show line number
+" set nunmber
+" when moving my cursor, wrap in all cases (don''t get stuck at the end of
+" line, etc)
+set whichwrap=b,s,h,l,<,>,[,]
+" show me the matches on tab complete
+set wildmenu
+
+" version 6+ commands
+if version >= 600
+   " disable folding
+   set nofoldenable
+
+   " enable file type detection with plugin and indent loading
+   filetype plugin indent on
+endif
+
+map <F11> :set paste!<CR>
+command! Q quit
+command! W write
+command! Wq wq
+command! WQ wq
+"map <C-w><C-b> :GotoBufExplorerWindow<CR>
+
+"Then when you need to make changes to a system file, you can override the
+"read-only permissions by typing :w!!, vim will ask for your sudo password and
+"save your changes.
+cmap w!! %!sudo tee > /dev/null %
+
+" F10 to toggle line numbers
+map <F10> :set number!<CR>
+"imap <unique> <F10> :set number!
+"nnoremap <silent> <F10> :set number!<CR>
+"set numbertoggle=<F10>
+set number
+
+" F11 to toggle paste mode
+map <F11> :set invpaste<CR>
+set pastetoggle=<F11>
+
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+
+map T :TaskList<CR>
+map P :TlistToggle<CR>
+
+au BufNewFile,BufRead *.ipy,*.ipyw setf python
+
+" NERDTree
+map <F2> :NERDTreeToggle<CR>
+
+"tab control
+set tabpagemax=100
+
+" remove '=' from the list of valid filename chars. With <C-x><C-f> can easyly
+" complete filename
+set isfname-==
+
+" Command Make will call make and then cwindow which
+" opens a 3 line error window if any errors are found.
+" if no errors, it closes any open cwindow.
+:command -nargs=* Make make <args> | cwindow 3
+
+filetype indent on
+filetype plugin indent on
+
+"imap <unique> <C-TAB> <Plug>Jumper
+imap <unique> <M-Left> :bnext
+
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+imap <C-Space> <C-x><C-o>
+
+autocmd FileType python set ft=python.django " For SnipMate
+autocmd FileType html set ft=html.django_template " For SnipMate
+
+" Only do this part when compiled with support for autocommands
+if has("autocmd")
+  " Enable file type detection
+  filetype on
+ 
+  " Syntax of these languages is fussy over tabs Vs spaces
+  autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+  autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+ 
+  " Customisations based on house-style (arbitrary)
+  autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType less setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType wiz setlocal ts=2 sts=2 sw=2 expandtab
+ 
+  " Treat .rss files as XML
+  autocmd BufNewFile,BufRead *.rss setfiletype xml
+endif
+
+" Strip trailing whitespaces
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
+
+" for linux and windows users (using the control key)
+map <C-S-]> gt
+map <C-S-[> gT
+map <C-1> 1gt
+map <C-2> 2gt
+map <C-3> 3gt
+map <C-4> 4gt
+map <C-5> 5gt
+map <C-6> 6gt
+map <C-7> 7gt
+map <C-8> 8gt
+map <C-9> 9gt
+map <C-0> :tablast<CR>
+
+" save session
+" resume session with vim -S .vim.sess
+"autocmd VimLeavePre * mksession! .vim.sess
+
+" pyflakes
+autocmd FileType * map <F5> <Esc>:make<CR>
+autocmd FileType * map <F6> <Esc>:cp<CR>
+autocmd FileType * map <F7> <Esc>:cn<CR>
+autocmd FileType python map compiler pyflakes
+
+autocmd FileType python match ErrorMsg '\%>79v.\+' " show line long > 79 characters
+autocmd BufWritePre *.py,*.c %s/\s\+$//e        " Trim ending spaces
+
+" vimdiff http://blog.binchen.org/?p=601
+map <silent> <leader>2 :diffget 2<CR> :diffupdate<CR>
+map <silent> <leader>3 :diffget 3<CR> :diffupdate<CR>
+map <silent> <leader>4 :diffget 4<CR> :diffupdate<CR>
