@@ -1,0 +1,15 @@
+syntax: glob
+docs/_build
+.svnignore
+.DS_Store
+.svn
+Thumbs.db
+.directory
+.htpass
+{{ cookiecutter.project_name }}/settings.py
+.git
+*.swp
+*~
+*-
+*.pyc
+*.kpf

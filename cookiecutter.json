@@ -1,0 +1,24 @@
+{
+    "_copy_without_render": [
+        "*.scss",
+        "*.css",
+        "*.less",
+        "*.js",
+        "etc/*"
+    ],
+    "project_title": "My New Project",
+    "project_description": "My New Project description",
+
+    "camel_case_app_name": "{{ cookiecutter.project_title|replace(' ', '') }}",
+    "project_name": "{{ cookiecutter.project_title|lower|replace(' ', '_') }}",
+    "project_dir": "{{ cookiecutter.project_title|lower|replace(' ', '-') }}",
+
+    "admin": "default",
+    "language_code": "en-us",
+    "timezone": "Europe/Rome",
+    "author": "Raffaele Salmaso",
+    "email": "raffele@salmaso.org",
+    "webapp_dir": "/home/www/{{ cookiecutter.project_dir }}",
+    "now": "{% now 'local' %}",
+    "year": "{{ cookiecutter.now[:4] }}"
+}
