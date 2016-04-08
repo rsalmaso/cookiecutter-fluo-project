@@ -1,4 +1,4 @@
-{% raw %}{% load i18n media_tags staticfiles %}
+{% raw %}{% load i18n media_tags staticfiles {% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %} cms_tags sekizai_tags{% endraw %}{% endif %}{% raw %}%}
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie7 oldie" lang="en"> <![endif]-->
@@ -15,26 +15,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {% endblock %}
 
-  {% block css %}
-  {% css 'css/all.css' %}
+  {% block css %}{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}
+  {% addtoblock "css" %}{% endraw %}{% endif %}{% raw %}
+  {% css 'css/all.css' %}{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}
+  {% endaddtoblock %}{% endraw %}{% endif %}{% raw %}
   {% block extra-css %}
-  {% endblock %}
-  {% css_ie 'css/ie.css' %}
-  {% endblock %}
+  {% endblock %}{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}
+  {% addtoblock "css" %}{% endraw %}{% endif %}{% raw %}
+  {% css_ie 'css/ie.css' %}{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}
+  {% endaddtoblock %}{% endraw %}{% endif %}{% raw %}
+  {% endblock %}{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}
+
+  {% render_block "css" %}{% endraw %}{% endif %}{% raw %}
 
   <script src="{% static "{% endraw %}{{ cookiecutter.project_name }}{% raw %}/js/modernizr-3.3.1.min.js" %}"></script>
   {% block js %}
-  {% block jquery %}
+  {% block jquery %}{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}
+  {% addtoblock "js" %}{% endraw %}{% endif %}{% raw %}
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="{% static "{% endraw %}{{ cookiecutter.project_name }}{% raw %}/js/jquery-1.12.3.min.js" %}"><\/script>')</script>
+  <script>window.jQuery || document.write('<script src="{% static "{% endraw %}{{ cookiecutter.project_name }}{% raw %}/js/jquery-1.12.3.min.js" %}"><\/script>')</script>{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}
+  {% endaddtoblock %}{% endraw %}{% endif %}{% raw %}
   {% endblock %}
-  {% block javascript %}
+  {% block javascript %}{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}
+  {% addtoblock "js" %}{% endraw %}{% endif %}{% raw %}
   <script defer src="{% static "{% endraw %}{{ cookiecutter.project_name }}{% raw %}/js/plugins.js" %}"></script>
-  <script defer src="{% static "{% endraw %}{{ cookiecutter.project_name }}{% raw %}/js/script.js" %}"></script>
+  <script defer src="{% static "{% endraw %}{{ cookiecutter.project_name }}{% raw %}/js/script.js" %}"></script>{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}
+  {% endaddtoblock %}{% endraw %}{% endif %}{% raw %}
   {% endblock %}
   {% comment %}
-  {% block analytics %}
+  {% block analytics %}{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}
+  {% addtoblock "js" %}{% endraw %}{% endif %}{% raw %}
   {# Google Analytics: change UA-XXXXX-X to be your site's ID. #}
   <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -43,7 +54,8 @@
       e.src='//www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X');ga('send','pageview');
-  </script>
+  </script>{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}
+  {% endaddtoblock %}{% endraw %}{% endif %}{% raw %}
   {% endblock %}
   {% endcomment %}
   {% block extra-js %}
@@ -51,7 +63,7 @@
   {% endblock %}
 </head>
 
-<body>{% block ie7 %}
+<body>{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}{% cms_toolbar %}{% endraw %}{% endif %}{% raw %}{% block ie7 %}
   <!--[if lt IE 8]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> to experience this site.</p><![endif]-->{% endblock %}
     <header>
       {% block header %}
@@ -66,6 +78,8 @@
       {% block footer %}
       {% endblock %}
     </footer>
-  </div> <!--! end of #container -->
+  </div> <!--! end of #container -->{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}
+
+  {% render_block "js" %}{% endraw %}{% endif %}{% raw %}
 </body>
 </html>{% endraw %}

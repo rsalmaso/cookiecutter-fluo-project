@@ -20,5 +20,6 @@
     "email": "raffele@salmaso.org",
     "webapp_dir": "/home/www/{{ cookiecutter.project_dir }}",
     "now": "{% now 'local' %}",
-    "year": "{{ cookiecutter.now[:4] }}"
+    "year": "{{ cookiecutter.now[:4] }}",
+    "project_type": ["web", "django-cms"]
 }

@@ -87,8 +87,37 @@ class BaseProject(object):
 class ProjectWeb(BaseProject):
     help = "install a simple django instance"
 
+class ProjectDjangoCms(BaseProject):
+    help = "install an django cms instance"
+
+    defaults = {
+        "name": "cms",
+    }
+
+    def get_deps(self, deps):
+        deps.extend([
+            "django-cms",
+            "django-filer",
+            "cmsplugin-filer",
+            "djangocms-video",
+            "djangocms-text-ckeditor",
+            "djangocms-teaser",
+            "djangocms-picture",
+            "djangocms-link",
+            "djangocms-file",
+            "djangocms-googlemap",
+            "djangocms-style",
+            "djangocms-column",
+            "djangocms-admin-style",
+            "django-reversion",
+            "django-widget-tweaks",
+            "django-select2",
+        ])
+        return deps
+
 PROJECTS = {
     "web": ProjectWeb,
+    "django-cms": ProjectDjangoCms,
 }
 
 def get_random_string(length=50, allowed_chars="abcdefghijklmnopqrstuvwxyz0123456789!@#%^&*(-_=+)"):
@@ -146,7 +175,10 @@ def make_secret_key(project_directory):
 def init():
     make_secret_key(PROJECT_DIRECTORY)
 
-    project = ProjectWeb()
+    try:
+        project = PROJECTS["{{ cookiecutter.project_type }}"]()
+    except:
+        project = ProjectWeb()
     project.install_libs()
     project.collectstatic()
 

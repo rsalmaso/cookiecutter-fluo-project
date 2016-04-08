@@ -36,10 +36,14 @@ mkdir(LOG_DIR)
 mkdir(TMP_DIR)
 
 _ = lambda s: s
+{% if cookiecutter.project_type == "django-cms" %}LANGUAGES = [
+    ("it", _("Italian")),
+    ("en", _("English")),
+]{% else %}
 #LANGUAGES = [
     #("it", _("Italian")),
     #("en", _("English")),
-#]
+#]{% endif %}
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -91,7 +95,7 @@ TIME_ZONE = "Europe/Rome"
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "en"
 
 SITE_ID = 1
 
@@ -175,6 +179,8 @@ TEMPLATES = [{
             #"django.core.context_processors.csrf",
             #"fluo.context_processors.media",
             #"fluo.context_processors.static",
+            {% if cookiecutter.project_type == "django-cms" %}"sekizai.context_processors.sekizai",
+            "cms.context_processors.cms_settings",{% endif %}
         ],
         #"loaders": [
             #"django.template.loaders.filesystem.Loader",
@@ -184,7 +190,8 @@ TEMPLATES = [{
 }]
 
 MIDDLEWARE_CLASSES = [
-    #"django.middleware.cache.UpdateCacheMiddleware", # enable cache
+    #"django.middleware.cache.UpdateCacheMiddleware", # enable cache{% if cookiecutter.project_type == "django-cms" %}
+    'cms.middleware.utils.ApphookReloadMiddleware',{% endif %}
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -195,7 +202,11 @@ MIDDLEWARE_CLASSES = [
     "django.middleware.locale.LocaleMiddleware",
     #"django.middleware.http.ConditionalGetMiddleware",
     #"django.middleware.gzip.GZipMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",{% if cookiecutter.project_type == "django-cms" %}
+    "cms.middleware.user.CurrentUserMiddleware",
+    "cms.middleware.page.CurrentPageMiddleware",
+    "cms.middleware.toolbar.ToolbarMiddleware",
+    "cms.middleware.language.LanguageCookieMiddleware",{% endif %}
     #"django.middleware.cache.FetchFromCacheMiddleware", # enable cache
 ]
 INTERNAL_IPS = ["127.0.0.1"]
@@ -217,7 +228,36 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles.apps.StaticFilesConfig",
     "django.contrib.admin.apps.AdminConfig",
     "fluo.apps.FluoConfig",
-    "{{ cookiecutter.project_name }}.apps.{{ cookiecutter.camel_case_app_name }}Config",
+    "{{ cookiecutter.project_name }}.apps.{{ cookiecutter.camel_case_app_name }}Config",{% if cookiecutter.project_type == "django-cms" %}
+
+    "mptt",
+    "treebeard",
+    "djangocms_text_ckeditor", # note this needs to be above the "cms" entry
+    "menus.apps.MenusConfig",
+    "classytags",
+    "sekizai",
+    "easy_thumbnails",
+    "widget_tweaks",
+    "formtools",
+    "reversion",
+
+    "cms.apps.CMSConfig",
+
+    "djangocms_column",
+    "djangocms_file",
+    "djangocms_googlemap",
+    "djangocms_link",
+    "djangocms_picture",
+    "djangocms_style",
+    "djangocms_teaser",
+    "djangocms_video",
+
+    "filer",
+    "cmsplugin_filer_file",
+    "cmsplugin_filer_folder",
+    "cmsplugin_filer_image",
+    "cmsplugin_filer_teaser",
+    "cmsplugin_filer_video",{% endif %}
 ]
 
 # A sample logging configuration. The only tangible logging
@@ -344,8 +384,52 @@ LOGGING = {
 #SERVER_EMAIL = "root@localhost"
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
 
+{% if cookiecutter.project_type == "django-cms" %}##############
+# DJANGO CMS #
+##############
 
+THUMBNAIL_PROCESSORS = (
+    "easy_thumbnails.processors.colorspace",
+    "easy_thumbnails.processors.autocrop",
+    #"easy_thumbnails.processors.scale_and_crop",
+    "filer.thumbnail_processors.scale_and_crop_with_subject_location",
+    "easy_thumbnails.processors.filters",
+)
+THUMBNAIL_MEDIA_ROOT = os.path.join(MEDIA_ROOT, "cache")
+THUMBNAIL_MEDIA_URL = MEDIA_URL + "cache/"
 
+CMS_TEMPLATES = [
+    ("{{ cookiecutter.project_name }}/index.html", _("Home Page (T1)")),
+]
+CMS_PLACEHOLDER_CONF = {
+}
+
+CMS_PERMISSION = False
+#CMS_MODERATOR = True
+CMS_URL_OVERWRITE = True
+CMS_MENU_TITLE_OVERWRITE = True
+CMS_SEO_FIELDS = True
+CMS_REDIRECTS = True
+CMS_LANGUAGES = {
+    1: [
+        {
+            "code": lang[0],
+            "name": lang[1],
+            "fallbacks": ["en"],
+            "public": True,
+        } for lang in LANGUAGES
+    ],
+    "default": {
+        "fallbacks": [lang[0] for lang in LANGUAGES],
+        "redirect_on_fallback": True,
+        "public": True,
+        "hide_untranslated": False,
+    }
+}
+CMS_SHOW_START_DATE = True
+CMS_SHOW_END_DATE = True
+
+{% endif %}
 #######################
 # Password validation #
 #######################
