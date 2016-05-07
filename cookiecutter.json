@@ -23,5 +23,5 @@
     "year": "{{ cookiecutter.now[:4] }}",
     "use_python2": "n",
     "project_type": ["web", "django-cms"],
-    "license": ["MIT", "Other"]
+    "license": ["MIT", "BSD-3", "Other"]
 }
