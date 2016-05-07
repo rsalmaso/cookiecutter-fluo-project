@@ -23,6 +23,7 @@ import pip
 import random
 from stua.os import system
 
+PYTHON = "python2" if "{{ cookiecutter.use_python2 }}".lower() == "y" else "python3"
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 
 def install(pkg):
@@ -77,7 +78,7 @@ class BaseProject(object):
     def collectstatic(self):
         system(
             "/usr/bin/env",
-            "python3",
+            PYTHON,
             os.path.join(PROJECT_DIRECTORY, "manage.py"),
             "collectstatic",
             "--noinput",

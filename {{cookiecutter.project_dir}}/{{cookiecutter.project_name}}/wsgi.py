@@ -1,3 +1,5 @@
+{% if cookiecutter.use_python2 == "y" %}# -*- coding: utf-8 -*-
+{% endif %}
 """
 WSGI config for www project.
 
@@ -14,7 +16,8 @@ framework.
 
 """
 
-import os, sys
+{% if cookiecutter.use_python2 == "y" %}from __future__ import absolute_import, division, print_function, unicode_literals
+{% endif %}import os, sys
 
 # PATH is the absolute path leading to parent directory
 PROJECT_PATH = os.path.split(os.path.realpath(__file__))[0]

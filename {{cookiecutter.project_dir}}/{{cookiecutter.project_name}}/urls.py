@@ -1,4 +1,7 @@
-from django.conf import settings
+{% if cookiecutter.use_python2 == "y" %}# -*- coding: utf-8 -*-
+
+from __future__ import absolute_import, division, print_function, unicode_literals
+{% endif %}from django.conf import settings
 from django.conf.urls import url, include{% if cookiecutter.project_type == "django-cms" %}
 from django.conf.urls.i18n import i18n_patterns{% else %}
 # Uncomment to enable i18n urls

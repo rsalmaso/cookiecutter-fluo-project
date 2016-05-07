@@ -21,5 +21,6 @@
     "webapp_dir": "/home/www/{{ cookiecutter.project_dir }}",
     "now": "{% now 'local' %}",
     "year": "{{ cookiecutter.now[:4] }}",
+    "use_python2": "n",
     "project_type": ["web", "django-cms"]
 }
