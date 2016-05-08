@@ -26,56 +26,21 @@ from stua.os import system
 PYTHON = "python2" if "{{ cookiecutter.use_python2 }}".lower() == "y" else "python3"
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 
-def install(pkg):
-    cmd = [
-        "install",
-        "--target={}".format(os.path.join(PROJECT_DIRECTORY, "lib")),
-    ]
-
-    cmd.extend([
-        pkg,
-    ])
-    pip.main(cmd)
-
-class BaseProject(object):
-    defaults = {
-        "name": "web",
-    }
-    pre_deps = [
-        "six",
-    ]
-    deps = [
-        "django",
-    ]
-    post_deps = [
-        "django-fluo",
-    ]
-
+class Project:
     def mkdir(self, directory):
         system("mkdir", "-p", os.path.join(
             PROJECT_DIRECTORY,
             directory,
         ))
 
-    def get_pre_deps(self, pre_deps):
-        return pre_deps
-
-    def get_deps(self, deps):
-        return deps
-
-    def get_post_deps(self, post_deps):
-        return post_deps
-
     def install_libs(self):
         self.mkdir("lib")
-        for dep in self.get_pre_deps(self.pre_deps):
-            install(dep)
-        for dep in self.get_deps(self.deps):
-            install(dep)
-        for dep in self.get_post_deps(self.post_deps):
-            install(dep)
-        if "{{ cookiecutter.use_djangorestframework }}".lower() == "y":
-            install("djangorestframework")
+        cmd = [
+            "install",
+            "--target={}".format(os.path.join(PROJECT_DIRECTORY, "lib")),
+            "-r", "requirements.txt",
+        ]
+        pip.main(cmd)
 
     def collectstatic(self):
         system(
@@ -85,43 +50,6 @@ class BaseProject(object):
             "collectstatic",
             "--noinput",
         )
-
-
-class ProjectWeb(BaseProject):
-    help = "install a simple django instance"
-
-class ProjectDjangoCms(BaseProject):
-    help = "install an django cms instance"
-
-    defaults = {
-        "name": "cms",
-    }
-
-    def get_deps(self, deps):
-        deps.extend([
-            "django-cms",
-            "django-filer",
-            "cmsplugin-filer",
-            "djangocms-video",
-            "djangocms-text-ckeditor",
-            "djangocms-teaser",
-            "djangocms-picture",
-            "djangocms-link",
-            "djangocms-file",
-            "djangocms-googlemap",
-            "djangocms-style",
-            "djangocms-column",
-            "djangocms-admin-style",
-            "django-reversion",
-            "django-widget-tweaks",
-            "django-select2",
-        ])
-        return deps
-
-PROJECTS = {
-    "web": ProjectWeb,
-    "django-cms": ProjectDjangoCms,
-}
 
 def get_random_string(length=50, allowed_chars="abcdefghijklmnopqrstuvwxyz0123456789!@#%^&*(-_=+)"):
     """
@@ -178,10 +106,7 @@ def make_secret_key(project_directory):
 def init():
     make_secret_key(PROJECT_DIRECTORY)
 
-    try:
-        project = PROJECTS["{{ cookiecutter.project_type }}"]()
-    except:
-        project = ProjectWeb()
+    project = Project()
     project.install_libs()
     project.collectstatic()
 
