@@ -11,13 +11,16 @@ from fluo import admin
 #from django.contrib import admin
 
 # Uncomment the next lines to enable custom handlers:
-#from django.conf.urls import handler403, handler404, handler500
-#handler403 = "{{ cookiecutter.project_name }}.views.handler403"
-#handler404 = "{{ cookiecutter.project_name }}.views.handler404"
-#handler500 = "{{ cookiecutter.project_name }}.views.handler500"
+from django.conf.urls import handler400, handler403, handler404, handler500
+handler400 = "{{ cookiecutter.project_name }}.views.bad_request"
+handler403 = "{{ cookiecutter.project_name }}.views.permission_denied"
+handler404 = "{{ cookiecutter.project_name }}.views.page_not_found"
+handler500 = "{{ cookiecutter.project_name }}.views.server_error"
 
 from django.views.generic import TemplateView
 from django.views import i18n as i18n_views
+from django.views import defaults as default_views
+from . import views
 
 catalog_patterns = [
     url(r"^plain$", i18n_views.set_language, name="i18n"),
@@ -45,6 +48,15 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+    # This allows the error pages to be debugged during development, just visit
+    # these url in browser to see how these error pages look like.
+    urlpatterns += [
+        url(r'^400$', views.bad_request, kwargs={'exception': Exception('Bad Request!')}),
+        url(r'^403$', views.permission_denied, kwargs={'exception': Exception('Permission Denied')}),
+        url(r'^404$', views.page_not_found, kwargs={'exception': Exception('Page not Found')}),
+        url(r'^500$', views.server_error),
+    ]
 
 
 {% if cookiecutter.project_type == "django-cms" %}urlpatterns += i18n_patterns("",
