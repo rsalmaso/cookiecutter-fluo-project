@@ -230,7 +230,9 @@ INSTALLED_APPS = [
     "django.contrib.messages.apps.MessagesConfig",
     "django.contrib.staticfiles.apps.StaticFilesConfig",
     "django.contrib.admin.apps.AdminConfig",
-    "fluo.apps.FluoConfig",
+    "fluo.apps.FluoConfig",{% if cookiecutter.use_djangorestframework == "y" %}
+    "rest_framework",
+    "rest_framework.authtoken",{% endif %}
     "{{ cookiecutter.project_name }}.apps.{{ cookiecutter.camel_case_app_name }}Config",{% if cookiecutter.project_type == "django-cms" %}
 
     "mptt",
@@ -451,6 +453,28 @@ AUTH_PASSWORD_VALIDATORS = [
         #'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     #},
 ]
+{% if cookiecutter.use_djangorestframework == "y" %}
+#########################
+# DJANGO REST FRAMEWORK #
+#########################
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        #"rest_framework.authentication.BasicAuthentication", # only for https
+        "rest_framework.authentication.SessionAuthentication",
+        #"rest_framework.authentication.TokenAuthentication", # only for https
+    ),
+    "DEFAULT_RENDERER_CLASSES": (
+        "rest_framework.renderers.JSONRenderer",
+        #"rest_framework.renderers.TemplateHTMLRenderer",
+        #"rest_framework.renderers.BrowsableAPIRenderer",
+    ),
+    "DEFAULT_PARSER_CLASSES": (
+        "rest_framework.parsers.JSONParser",
+        "rest_framework.parsers.FormParser",
+        "rest_framework.parsers.MultiPartParser",
+    ),
+}{% endif %}
 
 SILENCED_SYSTEM_CHECKS = [
 ]

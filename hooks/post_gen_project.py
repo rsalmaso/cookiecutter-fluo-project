@@ -74,6 +74,8 @@ class BaseProject(object):
             install(dep)
         for dep in self.get_post_deps(self.post_deps):
             install(dep)
+        if "{{ cookiecutter.use_djangorestframework }}".lower() == "y":
+            install("djangorestframework")
 
     def collectstatic(self):
         system(
