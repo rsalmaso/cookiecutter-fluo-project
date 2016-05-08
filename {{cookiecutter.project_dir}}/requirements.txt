@@ -1,0 +1,27 @@
+django
+django-fluo{% if cookiecutter.use_djangorestframework == "y" %}
+
+# django-rest-framework
+djangorestframework{% endif %}{% if cookiecutter.project_type == "django-cms" %}
+
+# django-cms
+django-cms
+django-sekizai
+django-filer
+cmsplugin-filer
+#relatorio
+djangocms-video
+djangocms-text-ckeditor
+djangocms-teaser
+#djangocms-snippet
+djangocms-picture
+djangocms-link
+#djangocms-inherit
+djangocms-googlemap
+djangocms-flash
+djangocms-file
+djangocms-style
+djangocms-column
+django-reversion
+django-widget-tweaks
+django-select2{% endif %}
