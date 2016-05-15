@@ -233,7 +233,8 @@ INSTALLED_APPS = [
     "django.contrib.messages.apps.MessagesConfig",
     "django.contrib.staticfiles.apps.StaticFilesConfig",
     "django.contrib.admin.apps.SimpleAdminConfig",
-    "fluo.apps.SimpleFluoConfig",{% if cookiecutter.use_djangorestframework == "y" %}
+    "fluo.apps.SimpleFluoConfig",{% if cookiecutter.use_sorl_thumbnail == "y" %}
+    "sorl.thumbnail",{% endif %}{% if cookiecutter.use_djangorestframework == "y" %}
 
     "rest_framework",
     "rest_framework.authtoken",{% endif %}{% if cookiecutter.project_type == "django-cms" %}

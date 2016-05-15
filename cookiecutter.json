@@ -23,6 +23,7 @@
     "year": "{{ cookiecutter.now[:4] }}",
     "use_python2": "n",
     "use_djangorestframework": "y",
+    "use_sorl_thumbnail": "y",
     "project_type": ["web", "django-cms"],
     "license": ["MIT", "BSD-3", "Other"]
 }
