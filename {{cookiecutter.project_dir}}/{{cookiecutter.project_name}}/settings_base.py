@@ -224,6 +224,8 @@ AUTH_USER_MODEL = "auth.User"
 WSGI_APPLICATION = os.environ.get("WSGI_APPLICATION", "{{ cookiecutter.project_name }}.wsgi.application")
 
 INSTALLED_APPS = [
+    "{{ cookiecutter.project_name }}.apps.{{ cookiecutter.camel_case_app_name }}Config",
+
     "django.contrib.auth.apps.AuthConfig",
     "django.contrib.contenttypes.apps.ContentTypesConfig",
     "django.contrib.sessions.apps.SessionsConfig",
@@ -233,8 +235,7 @@ INSTALLED_APPS = [
     "django.contrib.admin.apps.AdminConfig",
     "fluo.apps.FluoConfig",{% if cookiecutter.use_djangorestframework == "y" %}
     "rest_framework",
-    "rest_framework.authtoken",{% endif %}
-    "{{ cookiecutter.project_name }}.apps.{{ cookiecutter.camel_case_app_name }}Config",{% if cookiecutter.project_type == "django-cms" %}
+    "rest_framework.authtoken",{% endif %}{% if cookiecutter.project_type == "django-cms" %}
 
     "mptt",
     "treebeard",
@@ -389,6 +390,7 @@ LOGGING = {
 #EMAIL_SUBJECT_PREFIX = "[Django] "
 #SERVER_EMAIL = "root@localhost"
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
+
 
 {% if cookiecutter.project_type == "django-cms" %}##############
 # DJANGO CMS #
