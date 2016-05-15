@@ -21,6 +21,7 @@
 import os
 import pip
 import random
+import shutil
 from stua.os import system
 
 PYTHON = "python2" if "{{ cookiecutter.use_python2 }}".lower() == "y" else "python3"
@@ -103,11 +104,34 @@ def make_secret_key(project_directory):
         "settings_base.py",
     ))
 
+
+def fix_cmsplugins_migrations():
+    libdir = os.path.join(PROJECT_DIRECTORY, "lib")
+
+    pkgs = [
+        "cmsplugin_filer_file",
+        "cmsplugin_filer_folder",
+        "cmsplugin_filer_image",
+        "cmsplugin_filer_link",
+        "cmsplugin_filer_teaser",
+        "cmsplugin_filer_video",
+    ]
+    for pkg in pkgs:
+        migrations = os.path.join(libdir, pkg, "migrations")
+        south_migrations = os.path.join(libdir, pkg, "south_migrations")
+        django_migrations = os.path.join(libdir, pkg, "migrations_django")
+        if os.path.exists(django_migrations):
+            shutil.move(migrations, south_migrations)
+            shutil.move(django_migrations, migrations)
+
+
 def init():
     make_secret_key(PROJECT_DIRECTORY)
 
     project = Project()
     project.install_libs()
+    if "{{ cookiecutter.project_type }}" == "django-cms":
+        fix_cmsplugins_migrations()
     project.collectstatic()
 
 init()
