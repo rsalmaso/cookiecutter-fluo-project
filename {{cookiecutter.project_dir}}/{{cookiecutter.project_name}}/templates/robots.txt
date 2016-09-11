@@ -5,18 +5,18 @@
 #Google Search Engine Robot
 User-agent: Googlebot
 Disallow: /admin
-Sitemap: http://example.com/sitemap.xml
+Sitemap: {{ request.build_absolute_uri }}/sitemap.xml
 
 #Yahoo! Search Engine Robot
 User-Agent: Slurp
 Crawl-delay: 1
 Disallow: /admin
-Sitemap: http://example.com/sitemap.xml
+Sitemap: {{ request.build_absolute_uri }}/sitemap.xml
 
 #Microsoft Search Engine Robot
 User-Agent: msnbot
 Disallow: /admin
-Sitemap: http://example.com/sitemap.xml
+Sitemap: {{ request.build_absolute_uri }}/sitemap.xml
 
 #Disallow for email Collectors
 User-agent: Titan
@@ -37,5 +37,5 @@ Disallow: /
 # Every bot that might possibly read and respect this file.
 User-agent: *
 Disallow: /admin
-Sitemap: http://example.com/sitemap.xml
+Sitemap: {{ request.build_absolute_uri }}/sitemap.xml
 {% endraw %}
