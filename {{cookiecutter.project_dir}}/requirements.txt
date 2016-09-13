@@ -1,6 +1,7 @@
 django
 django-fluo{% if cookiecutter.use_sekizai == "y" or cookiecutter.project_type == "django-cms" %}
-django-sekizai{% endif %}{% if cookiecutter.use_sorl_thumbnail == "y" %}
+django-sekizai{% endif %}{% if cookiecutter.use_widget_tweaks == "y" or cookiecutter.project_type == "django-cms" %}
+django-widget-tweaks{% endif %}{% if cookiecutter.use_sorl_thumbnail == "y" %}
 sorl-thumbnail{% endif %}{% if cookiecutter.use_djangorestframework == "y" %}
 
 # django-rest-framework
@@ -24,5 +25,4 @@ djangocms-file
 djangocms-style
 djangocms-column
 django-reversion
-django-widget-tweaks
 django-select2{% endif %}

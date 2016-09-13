@@ -236,14 +236,14 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",{% endif %}{% if cookiecutter.use_sekizai == "y" or cookiecutter.project_type == "django-cms" %}
 
     "classytags",
-    "sekizai",{% endif %}{% if cookiecutter.project_type == "django-cms" %}
+    "sekizai",{% endif %}{% if cookiecutter.use_widget_tweaks == "y" or cookiecutter.project_type == "django-cms" %}
+    "widget_tweaks",{% endif %}{% if cookiecutter.project_type == "django-cms" %}
 
     "mptt",
     "treebeard",
     "djangocms_text_ckeditor", # note this needs to be above the "cms" entry
     "menus.apps.MenusConfig",
     "easy_thumbnails",
-    "widget_tweaks",
     "formtools",
     "reversion",
 
