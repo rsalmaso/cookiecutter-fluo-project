@@ -176,8 +176,9 @@ TEMPLATES = [{
             "django.template.context_processors.i18n",
             "django.template.context_processors.request",
             "django.template.context_processors.tz",
-            "django.contrib.auth.context_processors.auth",{% if cookiecutter.project_type == "django-cms" %}
-            "cms.context_processors.cms_settings",
+            "django.contrib.auth.context_processors.auth",
+            "django.contrib.messages.context_processors.messages",{% if cookiecutter.project_type == "django-cms" %}
+            "cms.context_processors.cms_settings",{% endif %}{% if cookiecutter.use_sekizai == "y" or cookiecutter.project_type == "django-cms" %}
             "sekizai.context_processors.sekizai",{% endif %}
         ],
         #"loaders": [
@@ -232,14 +233,15 @@ INSTALLED_APPS = [
     "sorl.thumbnail",{% endif %}{% if cookiecutter.use_djangorestframework == "y" %}
 
     "rest_framework",
-    "rest_framework.authtoken",{% endif %}{% if cookiecutter.project_type == "django-cms" %}
+    "rest_framework.authtoken",{% endif %}{% if cookiecutter.use_sekizai == "y" or cookiecutter.project_type == "django-cms" %}
+
+    "classytags",
+    "sekizai",{% endif %}{% if cookiecutter.project_type == "django-cms" %}
 
     "mptt",
     "treebeard",
     "djangocms_text_ckeditor", # note this needs to be above the "cms" entry
     "menus.apps.MenusConfig",
-    "classytags",
-    "sekizai",
     "easy_thumbnails",
     "widget_tweaks",
     "formtools",

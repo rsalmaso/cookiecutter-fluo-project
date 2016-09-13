@@ -1,5 +1,6 @@
 django
-django-fluo{% if cookiecutter.use_sorl_thumbnail == "y" %}
+django-fluo{% if cookiecutter.use_sekizai == "y" or cookiecutter.project_type == "django-cms" %}
+django-sekizai{% endif %}{% if cookiecutter.use_sorl_thumbnail == "y" %}
 sorl-thumbnail{% endif %}{% if cookiecutter.use_djangorestframework == "y" %}
 
 # django-rest-framework
@@ -7,7 +8,6 @@ djangorestframework{% endif %}{% if cookiecutter.project_type == "django-cms" %}
 
 # django-cms
 django-cms
-django-sekizai
 django-filer
 cmsplugin-filer
 #relatorio
