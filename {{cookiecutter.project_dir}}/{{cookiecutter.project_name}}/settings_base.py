@@ -171,19 +171,14 @@ TEMPLATES = [{
     "APP_DIRS": True,
     "OPTIONS": {
         "context_processors": [
+            #"django.template.context_processors.csrf",
             "django.template.context_processors.debug",
+            "django.template.context_processors.i18n",
             "django.template.context_processors.request",
-            "django.contrib.auth.context_processors.auth",
-            "django.contrib.messages.context_processors.messages",
-
-            "django.core.context_processors.i18n",
-            "django.core.context_processors.request",
-            "django.core.context_processors.tz",
-            #"django.core.context_processors.csrf",
-            #"fluo.context_processors.media",
-            #"fluo.context_processors.static",
-            {% if cookiecutter.project_type == "django-cms" %}"sekizai.context_processors.sekizai",
-            "cms.context_processors.cms_settings",{% endif %}
+            "django.template.context_processors.tz",
+            "django.contrib.auth.context_processors.auth",{% if cookiecutter.project_type == "django-cms" %}
+            "cms.context_processors.cms_settings",
+            "sekizai.context_processors.sekizai",{% endif %}
         ],
         #"loaders": [
             #"django.template.loaders.filesystem.Loader",
