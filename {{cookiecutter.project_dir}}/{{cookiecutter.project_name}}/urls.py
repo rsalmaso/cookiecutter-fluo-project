@@ -63,6 +63,6 @@ if settings.DEBUG:
     url(r"^admin/", include(admin.site.urls)),
     url(r"^", include("cms.urls")),
 ){% else %}
-#urlpatterns += i18n_patterns("",
+#urlpatterns += i18n_patterns(
     #url(r"^{{ cookiecutter.project_name }}/", include("{{ cookiecutter.project_name }}.foo.urls")),
 #){% endif %}
