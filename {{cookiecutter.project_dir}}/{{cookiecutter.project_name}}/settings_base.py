@@ -281,6 +281,10 @@ LOGGING = {
         "simple": {
             "format": "[%(asctime)s] %(levelname)s %(message)s",
         },
+        'django.server': {
+            '()': 'django.utils.log.ServerFormatter',
+            'format': '[%(server_time)s] %(message)s',
+        },
     },
     "filters": {
         "require_debug_false": {
@@ -329,6 +333,11 @@ LOGGING = {
             #"filters": ["special"]
             "filters": ["require_debug_false"],
         },
+        'django.server': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'django.server',
+        },
     },
     "loggers": {
         "django": {
@@ -343,6 +352,11 @@ LOGGING = {
             "handlers": ["error_file", "mail_admins"],
             "level": "ERROR",
             "propagate": False,
+        },
+        'django.server': {
+            'handlers': ['django.server'],
+            'level': 'INFO',
+            'propagate': False,
         },
         "{{ cookiecutter.project_name }}": {
             "handlers": ["console", "file", "error_file", "mail_admins"],
