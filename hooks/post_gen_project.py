@@ -25,6 +25,7 @@ from stua.os import system
 
 PYTHON = "python2" if "{{ cookiecutter.use_python2 }}".lower() == "y" else "python3"
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
+LIB_DIR = os.path.join(PROJECT_DIRECTORY, "lib")
 
 class Project:
     def mkdir(self, directory):
@@ -37,7 +38,7 @@ class Project:
         self.mkdir("lib")
         cmd = [
             "install",
-            "--target={}".format(os.path.join(PROJECT_DIRECTORY, "lib")),
+            "--target={}".format(LIB_DIR),
             "-r", "requirements.txt",
         ]
         pip.main(cmd)
