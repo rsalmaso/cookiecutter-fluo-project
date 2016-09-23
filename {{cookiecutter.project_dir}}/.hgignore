@@ -16,6 +16,7 @@ Thumbs.db
 *.orig
 *.bak
 {{ cookiecutter.project_name }}*.sql
+{{ cookiecutter.project_name }}*.sql.gz
 {{ cookiecutter.project_name }}.db
 
 syntax: regexp
