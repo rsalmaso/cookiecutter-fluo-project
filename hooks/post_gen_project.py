@@ -21,11 +21,13 @@
 import os
 import pip
 import random
+import shutil
 from stua.os import system
 
 PYTHON = "python2" if "{{ cookiecutter.use_python2 }}".lower() == "y" else "python3"
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 LIB_DIR = os.path.join(PROJECT_DIRECTORY, "lib")
+PATCHES_DIR = os.path.join(PROJECT_DIRECTORY, "_patches")
 
 class Project:
     def mkdir(self, directory):
@@ -104,12 +106,29 @@ def make_secret_key(project_directory):
         "settings_base.py",
     ))
 
+def apply_patches():
+    cwd = os.getcwd()
+    os.chdir(LIB_DIR)
+    libs = [lib for lib in os.listdir(LIB_DIR) if os.path.isdir(lib) and not lib.endswith(".dist-info") and lib != "__pycache__"]
+    patches = [patch for patch in os.listdir(PATCHES_DIR) if patch.endswith(".diff")]
+    for patch in patches:
+        lib = patch.split(".")[0]
+        if lib in libs:
+            os.chdir(os.path.join(LIB_DIR, lib))
+            system("patch", "-p1", "-i", os.path.join(PATCHES_DIR, patch))
+    os.chdir(cwd)
+
+def cleanup_patches():
+    if os.path.exists(PATCHES_DIR):
+        shutil.rmtree(PATCHES_DIR)
 
 def init():
     make_secret_key(PROJECT_DIRECTORY)
 
     project = Project()
     project.install_libs()
+    apply_patches()
+    cleanup_patches()
     project.collectstatic()
 
 init()
