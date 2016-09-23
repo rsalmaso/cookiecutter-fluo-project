@@ -27,5 +27,6 @@
     "use_sekizai": "y",
     "use_widget_tweaks": "y",
     "project_type": ["web", "django-cms"],
-    "license": ["MIT", "BSD-3", "Other"]
+    "license": ["MIT", "BSD-3", "Other"],
+    "vagrant": ["ubuntu/xenial64", "ubuntu/trusty64"]
 }

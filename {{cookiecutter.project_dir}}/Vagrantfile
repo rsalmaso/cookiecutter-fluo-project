@@ -10,7 +10,7 @@ end
 host = RbConfig::CONFIG['host_os']
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "{{ cookiecutter.vagrant }}"
 
   # If true, then any SSH connections made will enable agent forwarding.
   # Default value: false
