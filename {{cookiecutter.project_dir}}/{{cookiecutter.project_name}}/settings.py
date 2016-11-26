@@ -19,21 +19,18 @@ DEBUG = True
 host = socket.gethostbyaddr(socket.gethostname())[0]
 if host == "vagrant":
     pass
+#elif host == "myhost":
+    #DATABASES["default"].update({
+        #"ENGINE": os.environ.get("DATABASE_ENGINE", "django.db.backends.postgresql"),
+        #"NAME": os.environ.get("DATABASE_NAME", "{{ cookiecutter.project_name }}"),
+        #"USER": os.environ.get("DATABASE_USER", getpass.getuser()),
+        #"PASSWORD": os.environ.get("DATABASE_PASSWORD", ""),
+        #"HOST": os.environ.get("DATABASE_HOST", ""),
+        #"PORT": os.environ.get("DATABASE_PORT", "5432"),
+    #})
 else:
     # use default values defined in base.py
     pass
-
-
-DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get("DATABASE_ENGINE", "django.db.backends.postgresql"),
-        "NAME": os.environ.get("DATABASE_NAME", "{{ cookiecutter.project_name }}"),
-        "USER": os.environ.get("DATABASE_USER", getpass.getuser()),
-        "PASSWORD": os.environ.get("DATABASE_PASSWORD", ""),
-        "HOST": os.environ.get("DATABASE_HOST", ""),
-        "PORT": os.environ.get("DATABASE_PORT", "5432"),
-    }
-}
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "<%SECRET_KEY%>")
 

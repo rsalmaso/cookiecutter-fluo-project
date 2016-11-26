@@ -69,22 +69,7 @@ DATABASES = {
         "PASSWORD": os.environ.get("DATABASE_PASSWORD", ""),
         "HOST": os.environ.get("DATABASE_HOST", ""),
         "PORT": os.environ.get("DATABASE_PORT", "5432"),
-
-        #"ENGINE": os.environ.get("DATABASE_ENGINE", "django.db.backends.sqlite3"),
-        #"NAME": os.environ.get("DATABASE_NAME", rel("{{ cookiecutter.project_name }}.db")),
-        #"PASSWORD": os.environ.get("DATABASE_PASSWORD", ""),
-        #"USER": os.environ.get("DATABASE_USER", ""),
-        #"HOST": os.environ.get("DATABASE_HOST", ""),
-        #"PORT": os.environ.get("DATABASE_PORT", ""),
-
-        #"ENGINE": os.environ.get("DATABASE_ENGINE", "django.db.backends.mysql"),
-        #"NAME": os.environ.get("DATABASE_NAME", "{{ cookiecutter.project_name }}")),
-        #"PASSWORD": os.environ.get("DATABASE_PASSWORD", ""),
-        #"USER": os.environ.get("DATABASE_USER", ""),
-        #"HOST": os.environ.get("DATABASE_HOST", ""),
-        #"PORT": os.environ.get("DATABASE_PORT", ""),
-        #"OPTIONS": {"init_command": "SET storage_engine=INNODB"},
-    }
+    },
 }
 
 # Local time zone for this installation. Choices can be found here:
