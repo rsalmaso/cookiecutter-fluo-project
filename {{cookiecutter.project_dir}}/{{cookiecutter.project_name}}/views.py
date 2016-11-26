@@ -1,7 +1,4 @@
-{% if cookiecutter.use_python2 == "y" %}# -*- coding: utf-8 -*-
-
-from __future__ import absolute_import, division, print_function, unicode_literals
-{% endif %}from django.views import defaults as default_views
+from django.views import defaults as default_views
 from django.views.decorators.csrf import requires_csrf_token
 
 

@@ -24,7 +24,7 @@ import random
 import shutil
 import subprocess
 
-PYTHON = "python2" if "{{ cookiecutter.use_python2 }}".lower() == "y" else "python3"
+PYTHON = "python3"
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 LIB_DIR = os.path.join(PROJECT_DIRECTORY, "lib")
 PATCHES_DIR = os.path.join(PROJECT_DIRECTORY, "_patches")

@@ -1,7 +1,6 @@
-#!/usr/bin/env {% if cookiecutter.use_python2 == "y" %}python2{% else %}python3{% endif %}
+#!/usr/bin/env python3
 
-{% if cookiecutter.use_python2 == "y" %}from __future__ import absolute_import, division, print_function, unicode_literals
-{% endif %}import os, sys
+import os, sys
 
 # PATH is the absolute path leading to parent directory
 PATH = os.path.dirname(os.path.realpath(__file__))

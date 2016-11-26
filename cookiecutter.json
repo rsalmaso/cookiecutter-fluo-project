@@ -21,7 +21,6 @@
     "webapp_dir": "/home/www/{{ cookiecutter.project_dir }}",
     "now": "{% now 'local' %}",
     "year": "{{ cookiecutter.now[:4] }}",
-    "use_python2": "n",
     "use_djangorestframework": "y",
     "use_sorl_thumbnail": "y",
     "use_sekizai": "y",

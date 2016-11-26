@@ -1,11 +1,8 @@
-{% if cookiecutter.use_python2 == "y" %}# -*- coding: utf-8 -*-
-{% endif %}
 """
 Django settings for {{ cookiecutter.project_name }} project.
 """
 
-{% if cookiecutter.use_python2 == "y" %}from __future__ import absolute_import, division, print_function, unicode_literals
-{% endif %}import errno
+import errno
 import getpass
 import os
 from django.core.urlresolvers import reverse_lazy
