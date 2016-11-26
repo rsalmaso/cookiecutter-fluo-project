@@ -1,3 +1,4 @@
+pytz
 django
 django-fluo{% if cookiecutter.use_sekizai == "y" or cookiecutter.project_type == "django-cms" %}
 django-sekizai{% endif %}{% if cookiecutter.use_widget_tweaks == "y" or cookiecutter.project_type == "django-cms" %}
