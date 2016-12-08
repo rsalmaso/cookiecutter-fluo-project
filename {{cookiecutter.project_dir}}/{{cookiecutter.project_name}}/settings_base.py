@@ -227,7 +227,6 @@ INSTALLED_APPS = [
     "menus.apps.MenusConfig",
     "easy_thumbnails",
     "formtools",
-    "reversion",
 
     "cms.apps.CMSConfig",
 

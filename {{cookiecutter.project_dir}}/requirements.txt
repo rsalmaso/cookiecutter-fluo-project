@@ -25,6 +25,5 @@ djangocms-flash
 djangocms-file
 djangocms-style
 djangocms-column
-django-reversion<2.0
 django-polymorphic
 django-select2{% endif %}
