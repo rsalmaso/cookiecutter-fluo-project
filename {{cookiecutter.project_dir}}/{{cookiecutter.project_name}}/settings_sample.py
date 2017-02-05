@@ -1,6 +1,7 @@
 import getpass
 import os
 import socket
+from django.utils.translation import gettext_lazy as _
 from {{ cookiecutter.project_name }}.settings_base import *
 
 ADMINS = [

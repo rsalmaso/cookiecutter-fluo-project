@@ -6,6 +6,7 @@ import errno
 import getpass
 import os
 from django.core.urlresolvers import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 
 PROJECT_NAME = "{{ cookiecutter.project_name }}"
 PROJECT_PATH = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
@@ -35,7 +36,6 @@ def tmp_rel(*args):
 mkdir(LOG_DIR)
 mkdir(TMP_DIR)
 
-_ = lambda s: s
 {% if cookiecutter.project_type == "django-cms" %}LANGUAGES = [
     ("it", _("Italian")),
     ("en", _("English")),
