@@ -1,5 +1,5 @@
-from django.utils.translation import ugettext_lazy as _
 from fluo.apps import FluoConfig as AppConfig
+from django.utils.translation import gettext_lazy as _
 
 
 class {{ cookiecutter.camel_case_app_name }}Config(AppConfig):
