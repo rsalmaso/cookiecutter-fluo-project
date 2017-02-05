@@ -2,7 +2,6 @@
 Django settings for {{ cookiecutter.project_name }} project.
 """
 
-import errno
 import getpass
 import os
 from django.core.urlresolvers import reverse_lazy
@@ -16,9 +15,8 @@ def rel(*args):
 def mkdir(dir):
     try:
         os.makedirs(dir)
-    except OSError as e:
-        if e.errno != errno.EEXIST:
-            raise e
+    except FileExistsError:
+        pass
 
 LIB_DIR = rel("lib")
 def lib_rel(*args):
