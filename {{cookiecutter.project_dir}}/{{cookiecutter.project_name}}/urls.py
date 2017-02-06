@@ -56,7 +56,7 @@ if settings.DEBUG:
     ]
 
 
-{% if cookiecutter.project_type == "django-cms" %}urlpatterns += i18n_patterns("",
+{% if cookiecutter.project_type == "django-cms" %}urlpatterns += i18n_patterns(
     url(r"^admin/", include(admin.site.urls)),
     url(r"^", include("cms.urls")),
 ){% else %}
