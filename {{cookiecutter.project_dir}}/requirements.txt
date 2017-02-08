@@ -11,7 +11,6 @@ djangorestframework{% endif %}{% if cookiecutter.project_type == "django-cms" %}
 # django-cms
 django-cms
 django-filer
-cmsplugin-filer
 #relatorio
 djangocms-video
 djangocms-text-ckeditor

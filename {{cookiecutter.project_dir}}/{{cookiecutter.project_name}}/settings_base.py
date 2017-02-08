@@ -237,12 +237,7 @@ INSTALLED_APPS = [
     "djangocms_teaser",
     "djangocms_video",
 
-    "filer",
-    "cmsplugin_filer_file",
-    "cmsplugin_filer_folder",
-    "cmsplugin_filer_image",
-    "cmsplugin_filer_teaser",
-    "cmsplugin_filer_video",{% endif %}
+    "filer",{% endif %}
 ]
 
 # A sample logging configuration. The only tangible logging
