@@ -392,6 +392,7 @@ THUMBNAIL_PROCESSORS = (
 )
 THUMBNAIL_MEDIA_ROOT = os.path.join(MEDIA_ROOT, "cache")
 THUMBNAIL_MEDIA_URL = MEDIA_URL + "cache/"
+#THUMBNAIL_BASEDIR = "cache"
 
 CMS_TEMPLATES = [
     ("{{ cookiecutter.project_name }}/index.html", _("Home Page (T1)")),
