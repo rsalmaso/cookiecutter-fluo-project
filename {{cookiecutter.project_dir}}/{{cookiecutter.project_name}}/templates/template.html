@@ -32,9 +32,7 @@
   {% block js %}
   {% block jquery %}{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}
   {% addtoblock "js" %}{% endraw %}{% endif %}{% raw %}
-  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="{% static "{% endraw %}{{ cookiecutter.project_name }}{% raw %}/js/jquery-1.12.3.min.js" %}"><\/script>')</script>{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}
+  <script src="{% static "{% endraw %}{{ cookiecutter.project_name }}{% raw %}/js/jquery-1.12.3.min.js" %}"></script>{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}
   {% endaddtoblock %}{% endraw %}{% endif %}{% raw %}
   {% endblock %}
   {% block javascript %}{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}
