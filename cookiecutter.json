@@ -10,6 +10,7 @@
     "project_description": "My New Project description",
 
     "camel_case_app_name": "{{ cookiecutter.project_title|replace(' ', '') }}",
+    "upper_case_app_name": "{{ cookiecutter.project_title|upper|replace(' ', '_') }}",
     "project_name": "{{ cookiecutter.project_title|lower|replace(' ', '_') }}",
     "project_dir": "{{ cookiecutter.project_title|lower|replace(' ', '-') }}",
 
