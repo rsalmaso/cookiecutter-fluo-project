@@ -5,7 +5,6 @@ from django.conf.urls.i18n import i18n_patterns{% else %}
 #from django.conf.urls.i18n import i18n_patterns{% endif %}
 from django.conf.urls.static import static
 from fluo import admin
-#from django.contrib import admin
 
 # Uncomment the next lines to enable custom handlers:
 from django.conf.urls import handler400, handler403, handler404, handler500
