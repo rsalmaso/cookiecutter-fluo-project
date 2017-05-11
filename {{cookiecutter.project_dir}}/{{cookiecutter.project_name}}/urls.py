@@ -10,10 +10,10 @@ from fluo import admin
 
 from . import views
 
-handler400 = "{{ cookiecutter.project_name }}.views.bad_request"
-handler403 = "{{ cookiecutter.project_name }}.views.permission_denied"
-handler404 = "{{ cookiecutter.project_name }}.views.page_not_found"
-handler500 = "{{ cookiecutter.project_name }}.views.server_error"
+handler400 = views.bad_request
+handler403 = views.permission_denied
+handler404 = views.page_not_found
+handler500 = views.server_error
 
 catalog_patterns = [
     url(r"^plain$", i18n_views.set_language, name="i18n"),
