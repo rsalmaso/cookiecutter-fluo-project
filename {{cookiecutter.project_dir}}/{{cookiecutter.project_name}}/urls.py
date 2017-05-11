@@ -16,7 +16,6 @@ handler500 = "{{ cookiecutter.project_name }}.views.server_error"
 
 from django.views.generic import TemplateView
 from django.views import i18n as i18n_views
-from django.views import defaults as default_views
 from . import views
 
 catalog_patterns = [
