@@ -6,8 +6,6 @@ from django.conf.urls.i18n import i18n_patterns{% else %}
 from django.conf.urls.static import static
 from fluo import admin
 
-# Uncomment the next lines to enable custom handlers:
-from django.conf.urls import handler400, handler403, handler404, handler500
 handler400 = "{{ cookiecutter.project_name }}.views.bad_request"
 handler403 = "{{ cookiecutter.project_name }}.views.permission_denied"
 handler404 = "{{ cookiecutter.project_name }}.views.page_not_found"
