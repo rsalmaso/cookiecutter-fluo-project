@@ -4,16 +4,16 @@ from django.conf.urls.i18n import i18n_patterns{% else %}
 # Uncomment to enable i18n urls
 #from django.conf.urls.i18n import i18n_patterns{% endif %}
 from django.conf.urls.static import static
+from django.views import i18n as i18n_views
+from django.views.generic import TemplateView
 from fluo import admin
+
+from . import views
 
 handler400 = "{{ cookiecutter.project_name }}.views.bad_request"
 handler403 = "{{ cookiecutter.project_name }}.views.permission_denied"
 handler404 = "{{ cookiecutter.project_name }}.views.page_not_found"
 handler500 = "{{ cookiecutter.project_name }}.views.server_error"
-
-from django.views.generic import TemplateView
-from django.views import i18n as i18n_views
-from . import views
 
 catalog_patterns = [
     url(r"^plain$", i18n_views.set_language, name="i18n"),
