@@ -22,11 +22,11 @@ catalog_patterns = [
 ]
 
 urlpatterns = [
-    url(r"^robots.txt", TemplateView.as_view(
+    url(r"^robots\.txt", TemplateView.as_view(
         template_name="robots.txt",
         content_type="text/plain",
     ), name="{{ cookiecutter.project_name }}-robots"),
-    url(r"^crossdomain.xml$", TemplateView.as_view(
+    url(r"^crossdomain\.xml$", TemplateView.as_view(
         template_name="crossdomain.xml",
         content_type="application/xml",
     ), name="{{ cookiecutter.project_name }}-crossdomain"),
