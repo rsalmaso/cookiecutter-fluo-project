@@ -126,6 +126,9 @@ def cleanup_patches():
     if os.path.exists(PATCHES_DIR):
         shutil.rmtree(PATCHES_DIR)
 
+def remove_postgresql_files():
+    os.remove(os.path.join(PROJECT_DIRECTORY, "{{ cookiecutter.project_name }}", "migrations", "0001_initial.py"))
+
 def init():
     make_secret_key(PROJECT_DIRECTORY)
 
@@ -133,6 +136,8 @@ def init():
     project.install_libs()
     apply_patches()
     cleanup_patches()
+    if '{{ cookiecutter.use_postgresql }}'.lower() == 'n':
+        remove_postgresql_files()
     project.collectstatic()
 
 init()
