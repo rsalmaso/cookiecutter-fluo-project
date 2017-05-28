@@ -202,7 +202,8 @@ WSGI_APPLICATION = os.environ.get("WSGI_APPLICATION", "{{ cookiecutter.project_n
 INSTALLED_APPS = [
     "{{ cookiecutter.project_name }}.apps.{{ cookiecutter.camel_case_app_name }}Config",
 
-    "django.contrib.auth.apps.AuthConfig",
+    {% if cookiecutter.use_postgresql == "y" %}"django.contrib.postgres.apps.PostgresConfig",
+    {% endif %}"django.contrib.auth.apps.AuthConfig",
     "django.contrib.contenttypes.apps.ContentTypesConfig",
     "django.contrib.sessions.apps.SessionsConfig",
     "django.contrib.sites.apps.SitesConfig",
