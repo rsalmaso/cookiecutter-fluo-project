@@ -15,6 +15,7 @@ Thumbs.db
 *.kpf
 *.orig
 *.bak
+*.dist-info
 {{ cookiecutter.project_name }}*.sql
 {{ cookiecutter.project_name }}*.sql.gz
 {{ cookiecutter.project_name }}.db
