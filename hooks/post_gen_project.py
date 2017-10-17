@@ -120,16 +120,14 @@ def make_secret_key(project_directory):
     ))
 
 def apply_patches():
-    cwd = os.getcwd()
-    os.chdir(LIB_DIR)
-    libs = [lib for lib in os.listdir(LIB_DIR) if os.path.isdir(lib) and not lib.endswith(".dist-info") and lib != "__pycache__"]
-    patches = [patch for patch in os.listdir(PATCHES_DIR) if patch.endswith(".diff")]
-    for patch in patches:
-        lib = patch.split(".")[0]
-        if lib in libs:
-            os.chdir(os.path.join(LIB_DIR, lib))
-            system("patch", "-p1", "-i", os.path.join(PATCHES_DIR, patch))
-    os.chdir(cwd)
+    with cd(LIB_DIR):
+        libs = [lib for lib in os.listdir(LIB_DIR) if os.path.isdir(lib) and not lib.endswith(".dist-info") and lib != "__pycache__"]
+        patches = [patch for patch in os.listdir(PATCHES_DIR) if patch.endswith(".diff")]
+        for patch in patches:
+            lib = patch.split(".")[0]
+            if lib in libs:
+                os.chdir(os.path.join(LIB_DIR, lib))
+                system("patch", "-p1", "-i", os.path.join(PATCHES_DIR, patch))
 
 def cleanup_patches():
     if os.path.exists(PATCHES_DIR):
