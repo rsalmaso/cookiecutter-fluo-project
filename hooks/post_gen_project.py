@@ -19,6 +19,7 @@
 # THE SOFTWARE.
 
 import contextlib
+import glob
 import os
 import random
 import shutil
@@ -30,6 +31,7 @@ PYTHON = "python3"
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 LIB_DIR = os.path.join(PROJECT_DIRECTORY, "lib")
 PATCHES_DIR = os.path.join(PROJECT_DIRECTORY, "_patches")
+REMOVE_DIRS = []
 
 @contextlib.contextmanager
 def cd(path):
@@ -133,6 +135,15 @@ def cleanup_patches():
     if os.path.exists(PATCHES_DIR):
         shutil.rmtree(PATCHES_DIR)
 
+def cleanup_libs():
+    with cd(LIB_DIR):
+        dirs = []
+        for path in REMOVE_DIRS:
+            dirs.extend(glob.glob(path))
+        for path in dirs:
+            if os.path.exists(path):
+                shutil.rmtree(path)
+
 def remove_postgresql_files():
     os.remove(os.path.join(PROJECT_DIRECTORY, "{{ cookiecutter.project_name }}", "migrations", "0001_initial.py"))
 
@@ -143,6 +154,7 @@ def init():
     project.install_libs()
     apply_patches()
     cleanup_patches()
+    cleanup_libs()
     if '{{ cookiecutter.use_postgresql }}'.lower() == 'n':
         remove_postgresql_files()
     project.collectstatic()
