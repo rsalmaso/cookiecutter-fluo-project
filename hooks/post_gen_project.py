@@ -18,6 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+import contextlib
 import os
 import random
 import shutil
@@ -29,6 +30,13 @@ PYTHON = "python3"
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 LIB_DIR = os.path.join(PROJECT_DIRECTORY, "lib")
 PATCHES_DIR = os.path.join(PROJECT_DIRECTORY, "_patches")
+
+@contextlib.contextmanager
+def cd(path):
+    cwd = os.getcwd()
+    os.chdir(path)
+    yield
+    os.chdir(cwd)
 
 def system(*args, **kwargs):
     env = kwargs.pop('env', None)
