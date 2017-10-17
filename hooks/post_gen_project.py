@@ -31,7 +31,7 @@ PYTHON = "python3"
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 LIB_DIR = os.path.join(PROJECT_DIRECTORY, "lib")
 PATCHES_DIR = os.path.join(PROJECT_DIRECTORY, "_patches")
-REMOVE_DIRS = []
+REMOVE_DIRS = ["PIL", "Pillow*dist-info"]
 
 @contextlib.contextmanager
 def cd(path):
