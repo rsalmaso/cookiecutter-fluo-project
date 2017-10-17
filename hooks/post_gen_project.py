@@ -19,10 +19,11 @@
 # THE SOFTWARE.
 
 import os
-import pip
 import random
 import shutil
 import subprocess
+
+import pip
 
 PYTHON = "python3"
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
