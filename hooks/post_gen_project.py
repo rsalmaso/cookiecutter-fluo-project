@@ -27,7 +27,7 @@ import subprocess
 
 import pip
 
-PYTHON = "python3"
+PYTHON = os.environ.get("PYTHON", "python3")
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 LIB_DIR = os.path.join(PROJECT_DIRECTORY, "lib")
 PATCHES_DIR = os.path.join(PROJECT_DIRECTORY, "_patches")
