@@ -17,8 +17,8 @@ handler500 = views.server_error
 
 catalog_patterns = [
     url(r"^plain$", i18n_views.set_language, name="i18n"),
-    url(r"^javascript/(?P<packages>\S+?)$", i18n_views.javascript_catalog, name="js"),
-    url(r"^json/(?P<packages>\S+?)$", i18n_views.json_catalog, name="json"),
+    url(r"^javascript/(?P<packages>\S+?)$", i18n_views.JavaScriptCatalog.as_view(), name="js"),
+    url(r"^json/(?P<packages>\S+?)$", i18n_views.JSONCatalog.as_view(), name="json"),
 ]
 
 urlpatterns = [
@@ -31,9 +31,9 @@ urlpatterns = [
         content_type="application/xml",
     ), name="{{ cookiecutter.project_name }}-crossdomain"),
 
-    url(r"^i18n/", include(catalog_patterns, namespace="i18n")),{% if cookiecutter.project_type != "django-cms" %}
+    url(r"^i18n/", include((catalog_patterns, "i18n"))),{% if cookiecutter.project_type != "django-cms" %}
 
-    url(r"^admin/", include(admin.site.urls)),
+    url(r"^admin/", admin.site.urls),
 
     url(r"^$", TemplateView.as_view(template_name="{{ cookiecutter.project_name }}/index.html"), name="{{ cookiecutter.project_name }}-index"),{% endif %}
 ]
