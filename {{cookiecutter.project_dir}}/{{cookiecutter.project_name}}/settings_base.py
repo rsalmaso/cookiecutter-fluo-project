@@ -170,7 +170,7 @@ TEMPLATES = [{
 
 MIDDLEWARE_CLASSES = [
     #"django.middleware.cache.UpdateCacheMiddleware", # enable cache{% if cookiecutter.project_type == "django-cms" %}
-    'cms.middleware.utils.ApphookReloadMiddleware',{% endif %}
+    "cms.middleware.utils.ApphookReloadMiddleware",{% endif %}
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
