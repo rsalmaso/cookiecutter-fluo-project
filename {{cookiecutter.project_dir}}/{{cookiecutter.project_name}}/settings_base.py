@@ -4,7 +4,7 @@ Django settings for {{ cookiecutter.project_name }} project.
 
 import getpass
 import os
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 PROJECT_NAME = "{{ cookiecutter.project_name }}"
