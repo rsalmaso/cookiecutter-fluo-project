@@ -144,6 +144,18 @@ def cleanup_libs():
             if os.path.exists(path):
                 shutil.rmtree(path)
 
+def remove_vuejs_files():
+    path = os.path.join(
+        PROJECT_DIRECTORY,
+        "{{ cookiecutter.project_name }}",
+        "static",
+        "{{ cookiecutter.project_name }}",
+        "libs",
+        "vue",
+    )
+    if os.path.exists(path):
+        shutil.rmtree(path)
+
 def remove_postgresql_files():
     os.remove(os.path.join(PROJECT_DIRECTORY, "{{ cookiecutter.project_name }}", "migrations", "0001_initial.py"))
 
@@ -157,6 +169,8 @@ def init():
     cleanup_libs()
     if '{{ cookiecutter.use_postgresql }}'.lower() == 'n':
         remove_postgresql_files()
+    if '{{ cookiecutter.use_vuejs }}'.lower() == 'n':
+        remove_vuejs_files()
     project.collectstatic()
 
 init()
