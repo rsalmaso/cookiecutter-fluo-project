@@ -190,9 +190,9 @@ MIDDLEWARE = [
 INTERNAL_IPS = ["127.0.0.1"]
 
 ROOT_URLCONF = "{{ cookiecutter.project_name }}.urls"
-LOGIN_URL = reverse_lazy("login")
-LOGOUT_URL = reverse_lazy("logout")
-LOGIN_REDIRECT_URL = "/" #"/accounts/profile/"
+#LOGIN_URL = reverse_lazy("login")
+#LOGOUT_URL = reverse_lazy("logout")
+#LOGIN_REDIRECT_URL = "/" #"/accounts/profile/"
 AUTH_USER_MODEL = "auth.User"
 
 # Python dotted path to the WSGI application used by Django's runserver.
