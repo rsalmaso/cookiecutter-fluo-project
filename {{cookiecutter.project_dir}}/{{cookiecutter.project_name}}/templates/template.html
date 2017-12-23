@@ -1,4 +1,4 @@
-{% raw %}{% load i18n media_tags staticfiles {% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}cms_tags {% endraw %}{% endif %}{% if cookiecutter.project_type == "django-cms" or cookiecutter.use_sekizai == "y" %}{% raw %}sekizai_tags {% endraw %}{% endif %}{% raw %}%}
+{% raw %}{% load i18n media_tags staticfiles {% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}cms_tags {% endraw %}{% endif %}{% if cookiecutter.use_cookielaw == "y" %}{% raw %}legal_tags {% endraw %}{% endif %}{% if cookiecutter.project_type == "django-cms" or cookiecutter.use_sekizai == "y" %}{% raw %}sekizai_tags {% endraw %}{% endif %}{% raw %}%}
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie7 oldie" lang="en"> <![endif]-->
@@ -81,7 +81,8 @@
       {% block footer %}
       {% endblock %}
     </footer>
-  </div> <!--! end of #container -->{% endraw %}{% if cookiecutter.project_type == "django-cms" or cookiecutter.use_sekizai == "y" %}{% raw %}
+  </div> <!--! end of #container -->{% endraw %}{% if cookiecutter.use_cookielaw == "y" %}{% raw %}
+  {% cookielaw %}{% endraw %}{% endif %}{% if cookiecutter.project_type == "django-cms" or cookiecutter.use_sekizai == "y" %}{% raw %}
 
   {% render_block "js" %}{% endraw %}{% endif %}{% raw %}
 </body>

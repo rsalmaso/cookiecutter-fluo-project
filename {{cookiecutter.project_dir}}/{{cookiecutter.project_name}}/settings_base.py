@@ -237,7 +237,8 @@ INSTALLED_APPS = [
     "djangocms_teaser",
     "djangocms_video",
 
-    "filer",{% endif %}
+    "filer",{% endif %}{% if cookiecutter.use_cookielaw == "y" %}
+    "legal.apps.LegalConfig",{% endif %}
 ]
 
 # A sample logging configuration. The only tangible logging
