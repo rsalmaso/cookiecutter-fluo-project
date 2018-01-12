@@ -2,7 +2,7 @@ import getpass
 import os
 import socket
 from django.utils.translation import gettext_lazy as _
-from {{ cookiecutter.project_name }}.settings_base import *
+from .base import *
 
 ADMINS = [
     # ("Your Name", "your_email@example.com"),
@@ -14,7 +14,6 @@ DEBUG = True
 ############
 # DATABASE #
 ############
-
 host = socket.gethostbyaddr(socket.gethostname())[0]
 if host == "vagrant":
     pass
@@ -31,6 +30,7 @@ else:
     # use default values defined in base.py
     pass
 
+SECRET_KEY = os.environ.get("SECRET_KEY", "<%SECRET_KEY%>")
 
 #########
 # CACHE #

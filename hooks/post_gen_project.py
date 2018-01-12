@@ -112,13 +112,15 @@ def make_secret_key(project_directory):
     set_secret_key(os.path.join(
         project_directory,
         "{{ cookiecutter.project_name }}",
-        "settings.py",
+        "conf",
+        "local.py",
     ))
 
     set_secret_key(os.path.join(
         project_directory,
         "{{ cookiecutter.project_name }}",
-        "settings_base.py",
+        "conf",
+        "base.py",
     ))
 
 def apply_patches():

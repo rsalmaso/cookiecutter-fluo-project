@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 PROJECT_NAME = "{{ cookiecutter.project_name }}"
-PROJECT_PATH = os.path.split(os.path.split(os.path.realpath(__file__))[0])[0]
+PROJECT_PATH = os.path.split(os.path.split(os.path.split(os.path.realpath(__file__))[0])[0])[0]
 
 def rel(*args):
     return os.path.normpath(os.path.join(PROJECT_PATH, *args))
@@ -207,8 +207,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions.apps.SessionsConfig",
     "django.contrib.sites.apps.SitesConfig",
     "django.contrib.messages.apps.MessagesConfig",
-    "{{ cookiecutter.project_name }}.apps.{{ cookiecutter.camel_case_app_name }}StaticFilesConfig",
-    "{{ cookiecutter.project_name }}.apps.{{ cookiecutter.camel_case_app_name }}AdminConfig",
+    "{{ cookiecutter.project_name }}.apps.StaticFilesConfig",
+    "{{ cookiecutter.project_name }}.apps.AdminConfig",
     "fluo.apps.FluoConfig",{% if cookiecutter.use_sorl_thumbnail == "y" %}
     "sorl.thumbnail",{% endif %}{% if cookiecutter.use_djangorestframework == "y" %}
 

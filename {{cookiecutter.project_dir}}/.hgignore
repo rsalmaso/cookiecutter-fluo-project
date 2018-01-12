@@ -4,7 +4,7 @@ doc/_build
 .DS_Store
 .svn
 Thumbs.db
-{{ cookiecutter.project_name }}/settings.py
+{{ cookiecutter.project_name }}/conf/local.py
 .directory
 .venv
 .sass-cache

@@ -2,10 +2,10 @@ from django.apps import AppConfig
 from django.utils.module_loading import import_module
 from django.utils.translation import gettext_lazy as _
 from fluo.apps import FluoAdminConfig
-from django.contrib.staticfiles.apps import StaticFilesConfig
+from django.contrib.staticfiles.apps import StaticFilesConfig as BaseStaticFilesConfig
 
 
-class {{ cookiecutter.camel_case_app_name }}AdminConfig(FluoAdminConfig):
+class AdminConfig(FluoAdminConfig):
     default_site = "{{ cookiecutter.project_name }}.admin.sites.AdminSite"
 
     def ready(self):
@@ -18,8 +18,8 @@ class {{ cookiecutter.camel_case_app_name }}Config(AppConfig):
     verbose_name = _("{{ cookiecutter.camel_case_app_name }}")
 
 
-class {{ cookiecutter.camel_case_app_name }}StaticFilesConfig(StaticFilesConfig):
-    ignore_patterns = StaticFilesConfig.ignore_patterns + ['scss', '*.scss', 'less', '*.less', '*-', '*.bak', '*.orig', '.hg', '.git']
+class StaticFilesConfig(BaseStaticFilesConfig):
+    ignore_patterns = BaseStaticFilesConfig.ignore_patterns + ['scss', '*.scss', 'less', '*.less', '*-', '*.bak', '*.orig', '.hg', '.git']
 
 
 class ClassyTagsConfig(AppConfig):
