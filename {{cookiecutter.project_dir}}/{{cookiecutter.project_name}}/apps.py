@@ -15,3 +15,8 @@ class {{ cookiecutter.camel_case_app_name }}AdminConfig(FluoAdminConfig):
 class {{ cookiecutter.camel_case_app_name }}Config(AppConfig):
     name = "{{ cookiecutter.project_name }}"
     verbose_name = _("{{ cookiecutter.camel_case_app_name }}")
+
+
+class ClassyTagsConfig(AppConfig):
+    name = "classytags"
+    verbose_name = _("Classy Tags")

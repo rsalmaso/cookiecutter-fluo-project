@@ -215,9 +215,9 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",{% endif %}{% if cookiecutter.use_sekizai == "y" or cookiecutter.project_type == "django-cms" %}
 
-    "classytags",
     "sekizai",{% endif %}{% if cookiecutter.use_widget_tweaks == "y" or cookiecutter.project_type == "django-cms" %}
     "widget_tweaks",{% endif %}{% if cookiecutter.project_type == "django-cms" %}
+    "{{ cookiecutter.project_name }}.apps.ClassyTagsConfig",
 
     "mptt",
     "treebeard",
