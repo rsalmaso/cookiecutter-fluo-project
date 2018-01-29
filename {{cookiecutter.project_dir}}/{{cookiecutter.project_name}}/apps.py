@@ -20,3 +20,8 @@ class {{ cookiecutter.camel_case_app_name }}Config(AppConfig):
 class ClassyTagsConfig(AppConfig):
     name = "classytags"
     verbose_name = _("Classy Tags")
+
+
+class SekizaiConfig(AppConfig):
+    name = "sekizai"
+    verbose_name = _("Sekizai")
