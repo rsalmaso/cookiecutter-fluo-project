@@ -25,3 +25,8 @@ class ClassyTagsConfig(AppConfig):
 class SekizaiConfig(AppConfig):
     name = "sekizai"
     verbose_name = _("Sekizai")
+
+
+class WidgetTweaksConfig(AppConfig):
+    name = "widget_tweaks"
+    verbose_name = _("Widget Tweaks")
