@@ -289,6 +289,7 @@ LOGGING = {
             "when": "D",
             "interval": 7,
             "backupCount": 4,
+            "delay": True,
             # rotate every 7 days, keep 4 old copies
         },
         "error_file":{
@@ -299,6 +300,7 @@ LOGGING = {
             "when": "D",
             "interval": 7,
             "backupCount": 4,
+            "delay": True,
             # rotate every 7 days, keep 4 old copies
         },
         "mail_admins": {
