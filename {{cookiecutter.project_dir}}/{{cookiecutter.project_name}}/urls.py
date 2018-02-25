@@ -1,6 +1,7 @@
-from django.conf import settings
-from django.conf.urls import url, include{% if cookiecutter.project_type == "django-cms" %}
+from django.conf import settings{% if cookiecutter.project_type == "django-cms" %}
+from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns{% else %}
+from django.urls import include, re_path as url
 # Uncomment to enable i18n urls
 #from django.conf.urls.i18n import i18n_patterns{% endif %}
 from django.conf.urls.static import static
