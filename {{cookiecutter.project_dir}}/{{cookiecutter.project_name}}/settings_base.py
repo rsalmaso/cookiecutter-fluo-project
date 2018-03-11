@@ -207,7 +207,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions.apps.SessionsConfig",
     "django.contrib.sites.apps.SitesConfig",
     "django.contrib.messages.apps.MessagesConfig",
-    "django.contrib.staticfiles.apps.StaticFilesConfig",
+    "{{ cookiecutter.project_name }}.apps.{{ cookiecutter.camel_case_app_name }}StaticFilesConfig",
     "{{ cookiecutter.project_name }}.apps.{{ cookiecutter.camel_case_app_name }}AdminConfig",
     "fluo.apps.FluoConfig",{% if cookiecutter.use_sorl_thumbnail == "y" %}
     "sorl.thumbnail",{% endif %}{% if cookiecutter.use_djangorestframework == "y" %}
