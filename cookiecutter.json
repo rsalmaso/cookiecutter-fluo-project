@@ -13,6 +13,7 @@
     "upper_case_app_name": "{{ cookiecutter.project_title|upper|replace(' ', '_') }}",
     "project_name": "web",
     "project_dir": "{{ cookiecutter.project_title|lower|replace(' ', '-') }}",
+    "db_name": "{{ cookiecutter.project_title|lower|replace(' ', '_') }}",
 
     "admin": "default",
     "language_code": "en-us",

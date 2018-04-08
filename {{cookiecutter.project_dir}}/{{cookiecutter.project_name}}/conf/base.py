@@ -59,7 +59,7 @@ ALLOWED_HOSTS = []
 DATABASES = {
     "default": {
         "ENGINE": os.environ.get("DATABASE_ENGINE", "django.db.backends.postgresql"),
-        "NAME": os.environ.get("DATABASE_NAME", "{{ cookiecutter.project_name }}"),
+        "NAME": os.environ.get("DATABASE_NAME", "{{ cookiecutter.db_name }}"),
         "USER": os.environ.get("DATABASE_USER", getpass.getuser()),
         "PASSWORD": os.environ.get("DATABASE_PASSWORD", ""),
         "HOST": os.environ.get("DATABASE_HOST", ""),
