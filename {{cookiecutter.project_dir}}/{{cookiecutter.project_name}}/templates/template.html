@@ -38,7 +38,7 @@
   {% endblock %}{% endraw %}{% endif %}{% raw %}
   {% block jquery %}{% endraw %}{% if cookiecutter.project_type == "django-cms" or cookiecutter.use_sekizai == "y" %}{% raw %}
   {% addtoblock "js" %}{% endraw %}{% endif %}{% raw %}
-  {% js "{% endraw %}{{ cookiecutter.project_name }}{% raw %}/libs/jquery/jquery-3.2.1.min.js" %}{% endraw %}{% if cookiecutter.project_type == "django-cms" or cookiecutter.use_sekizai == "y" %}{% raw %}
+  {% js "{% endraw %}{{ cookiecutter.project_name }}{% raw %}/libs/jquery/jquery-3.3.1.min.js" %}{% endraw %}{% if cookiecutter.project_type == "django-cms" or cookiecutter.use_sekizai == "y" %}{% raw %}
   {% endaddtoblock %}{% endraw %}{% endif %}{% raw %}
   {% endblock %}
   {% block javascript %}{% endraw %}{% if cookiecutter.project_type == "django-cms" or cookiecutter.use_sekizai == "y" %}{% raw %}
