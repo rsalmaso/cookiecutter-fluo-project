@@ -32,6 +32,7 @@
   {% block js %}{% endraw %}{% if cookiecutter.use_vuejs == "y" %}{% raw %}
   {% block vuejs %}{% endraw %}{% if cookiecutter.project_type == "django-cms" or cookiecutter.use_sekizai == "y" %}{% raw %}
   {% addtoblock "js" %}{% endraw %}{% endif %}{% raw %}
+  {% if debug %}{% js "{% endraw %}{{ cookiecutter.project_name }}{% raw %}/libs/es6-promise/es6-promise.auto.js" %}{% else %}{% js "{% endraw %}{{ cookiecutter.project_name }}{% raw %}/libs/es6-promise/es6-promise.auto.min.js" %}{% endif %}
   {% if debug %}{% js "{% endraw %}{{ cookiecutter.project_name }}{% raw %}/libs/vue/vue.js" %}{% else %}{% js "{% endraw %}{{ cookiecutter.project_name }}{% raw %}/libs/vue/vue.min.js" %}{% endif %}{% endraw %}{% if cookiecutter.project_type == "django-cms" or cookiecutter.use_sekizai == "y" %}{% raw %}
   {% endaddtoblock %}{% endraw %}{% endif %}{% raw %}
   {% endblock %}{% endraw %}{% endif %}{% raw %}
