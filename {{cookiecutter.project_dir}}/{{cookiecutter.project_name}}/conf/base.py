@@ -161,6 +161,9 @@ TEMPLATES = [{
             "cms.context_processors.cms_settings",{% endif %}{% if cookiecutter.use_sekizai == "y" or cookiecutter.project_type == "django-cms" %}
             "sekizai.context_processors.sekizai",{% endif %}
         ],
+        "builtins": [
+            "fluo.templatetags.backports",
+        ],
         #"loaders": [
             #"django.template.loaders.filesystem.Loader",
             #"django.template.loaders.app_directories.Loader",
