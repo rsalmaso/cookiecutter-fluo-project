@@ -133,7 +133,7 @@ STATICFILES_FINDERS = [
     #"django.contrib.staticfiles.finders.DefaultStorageFinder",
 ]
 
-#STATICFILES_STORAGE = "django.contrib.staticfiles.storage.CachedStaticFilesStorage"
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # Make this unique, and don't share it with anybody.
