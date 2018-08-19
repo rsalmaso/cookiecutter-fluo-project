@@ -25,8 +25,6 @@ import random
 import shutil
 import subprocess
 
-import pip
-
 PYTHON = os.environ.get("PYTHON", "python3")
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 LIB_DIR = os.path.join(PROJECT_DIRECTORY, "lib")
@@ -54,11 +52,15 @@ class Project:
     def install_libs(self):
         self.mkdir("lib")
         cmd = [
+            "/usr/bin/env",
+            PYTHON,
+            "-m",
+            "pip",
             "install",
             "--target={}".format(LIB_DIR),
             "-r", "requirements.txt",
         ]
-        pip.main(cmd)
+        subprocess.call(cmd)
 
     def collectstatic(self):
         system(
