@@ -133,7 +133,7 @@ STATICFILES_FINDERS = [
     #"django.contrib.staticfiles.finders.DefaultStorageFinder",
 ]
 
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+STATICFILES_STORAGE = {% if cookiecutter.use_whitenoise == "y" %}"whitenoise.storage.CompressedManifestStaticFilesStorage"{% else %}"django.contrib.staticfiles.storage.ManifestStaticFilesStorage"{% endif %}
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # Make this unique, and don't share it with anybody.
@@ -170,7 +170,8 @@ TEMPLATES = [{
 MIDDLEWARE = [
     #"django.middleware.cache.UpdateCacheMiddleware", # enable cache{% if cookiecutter.project_type == "django-cms" %}
     "cms.middleware.utils.ApphookReloadMiddleware",{% endif %}
-    "django.middleware.security.SecurityMiddleware",
+    "django.middleware.security.SecurityMiddleware",{% if cookiecutter.use_whitenoise == "y" %}
+    "whitenoise.middleware.WhiteNoiseMiddleware",{% endif %}
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -205,7 +206,8 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes.apps.ContentTypesConfig",
     "django.contrib.sessions.apps.SessionsConfig",
     "django.contrib.sites.apps.SitesConfig",
-    "django.contrib.messages.apps.MessagesConfig",
+    "django.contrib.messages.apps.MessagesConfig",{% if cookiecutter.use_whitenoise == "y" %}
+    "whitenoise.runserver_nostatic",{% endif %}
     "{{ cookiecutter.project_name }}.apps.StaticFilesConfig",
     "{{ cookiecutter.project_name }}.apps.AdminConfig",
     "fluo.apps.FluoConfig",{% if cookiecutter.use_sorl_thumbnail == "y" %}
