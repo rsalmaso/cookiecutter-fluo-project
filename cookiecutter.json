@@ -31,6 +31,7 @@
     "use_widget_tweaks": "y",
     "use_vuejs": "y",
     "use_postgresql": "y",
+    "use_gunicorn": "y",
     "project_type": ["web", "django-cms"],
     "license": ["MIT", "BSD-3", "Other"],
     "vagrant": ["ubuntu/xenial64", "ubuntu/trusty64"]
