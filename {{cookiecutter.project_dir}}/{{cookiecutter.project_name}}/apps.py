@@ -19,7 +19,12 @@ class {{ cookiecutter.camel_case_app_name }}Config(AppConfig):
 
 
 class StaticFilesConfig(BaseStaticFilesConfig):
-    ignore_patterns = BaseStaticFilesConfig.ignore_patterns + ['scss', '*.scss', 'less', '*.less', '*-', '*.bak', '*.orig', '.hg', '.git']
+    ignore_patterns = BaseStaticFilesConfig.ignore_patterns + [
+        "scss", "*.scss",
+        "less", "*.less",
+        "*-", "*.bak", "*.orig",
+        ".hg", ".git",
+    ]
 
 
 class ClassyTagsConfig(AppConfig):
