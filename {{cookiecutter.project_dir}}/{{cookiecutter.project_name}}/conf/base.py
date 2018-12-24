@@ -57,14 +57,7 @@ MANAGERS = ADMINS
 ALLOWED_HOSTS = []
 
 DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get("DATABASE_ENGINE", "django.db.backends.postgresql"),
-        "NAME": os.environ.get("DATABASE_NAME", "{{ cookiecutter.db_name }}"),
-        "USER": os.environ.get("DATABASE_USER", getpass.getuser()),
-        "PASSWORD": os.environ.get("DATABASE_PASSWORD", ""),
-        "HOST": os.environ.get("DATABASE_HOST", ""),
-        "PORT": os.environ.get("DATABASE_PORT", "5432"),
-    },
+    "default": os.environ.get("DATABASES_DEFAULT", f"postgres://{getpass.getuser()}:@:5432/{{ cookiecutter.db_name }}"),
 }
 
 # Local time zone for this installation. Choices can be found here:
@@ -74,11 +67,11 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = "Europe/Rome"
+TIME_ZONE = os.environ.get("TIME_ZONE", "Europe/Rome")
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = "en"
+LANGUAGE_CODE = os.environ.get("LANGUAGE_CODE", "en")
 
 SITE_ID = 1
 
@@ -133,7 +126,7 @@ STATICFILES_FINDERS = [
     #"django.contrib.staticfiles.finders.DefaultStorageFinder",
 ]
 
-STATICFILES_STORAGE = {% if cookiecutter.use_whitenoise == "y" %}"whitenoise.storage.CompressedManifestStaticFilesStorage"{% else %}"django.contrib.staticfiles.storage.ManifestStaticFilesStorage"{% endif %}
+STATICFILES_STORAGE = os.environ.get("STATICFILES_STORAGE", {% if cookiecutter.use_whitenoise == "y" %}"whitenoise.storage.CompressedManifestStaticFilesStorage"{% else %}"django.contrib.staticfiles.storage.ManifestStaticFilesStorage"{% endif %})
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # Make this unique, and don't share it with anybody.
@@ -189,7 +182,7 @@ MIDDLEWARE = [
 ]
 INTERNAL_IPS = ["127.0.0.1"]
 
-ROOT_URLCONF = "{{ cookiecutter.project_name }}.urls"
+ROOT_URLCONF = os.environ.get("ROOT_URLCONF", "{{ cookiecutter.project_name }}.urls")
 #LOGIN_URL = reverse_lazy("login")
 #LOGOUT_URL = reverse_lazy("logout")
 #LOGIN_REDIRECT_URL = "/" #"/accounts/profile/"
@@ -345,34 +338,9 @@ LOGGING = {
 }
 
 ### Cache
-#CACHES = {
-    ## dummy backend
-    #"default": {
-        #"BACKEND": "django.core.cache.backends.dummy.DummyCache",
-        #"LOCATION": "",
-    #},
-    ## filesystem based
-    #"default": {
-        #"BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
-        #"LOCATION": base_rel("tmp"),
-    #},
-    #CACHES = {
-        #"default": {
-            #"BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
-            #"LOCATION": "127.0.0.1:11211",
-            #"LOCATION": "unix:/tmp/memcached.sock",
-            #"LOCATION": [
-                #"172.19.26.240:11211",
-                #"172.19.26.242:11211",
-            #],
-        #},
-    #},
-    ## memory based
-    #"default": {
-        #"BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-        #"LOCATION": "",
-    #},
-#}
+CACHES = {
+    "default": "dummy://"
+}
 #CACHE_MIDDLEWARE_KEY_PREFIX = ""
 #CACHE_MIDDLEWARE_SECONDS = 600
 #CACHE_MIDDLEWARE_ALIAS = "default"
@@ -380,7 +348,7 @@ LOGGING = {
 #DEFAULT_FROM_EMAIL = "webmaster@localhost"
 #EMAIL_SUBJECT_PREFIX = "[Django] "
 #SERVER_EMAIL = "root@localhost"
-EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", "django.core.mail.backends.console.EmailBackend")
+EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", f"file://{rel('emails')}")
 
 
 {% if cookiecutter.project_type == "django-cms" %}##############
