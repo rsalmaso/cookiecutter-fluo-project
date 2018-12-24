@@ -7,7 +7,7 @@ from .base import *
 ADMINS = [
     # ("Your Name", "your_email@example.com"),
 ]
-#ALLOWED_HOSTS = "[ * ]"
+#ALLOWED_HOSTS = ["*"]
 
 DEBUG = True
 
