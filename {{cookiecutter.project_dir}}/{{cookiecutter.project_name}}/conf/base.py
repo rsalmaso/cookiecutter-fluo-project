@@ -34,14 +34,10 @@ def tmp_rel(*args):
 mkdir(LOG_DIR)
 mkdir(TMP_DIR)
 
-{% if cookiecutter.project_type == "django-cms" %}LANGUAGES = [
+LANGUAGES = [
     ("it", _("Italian")),
     ("en", _("English")),
-]{% else %}
-#LANGUAGES = [
-    #("it", _("Italian")),
-    #("en", _("English")),
-#]{% endif %}
+]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
