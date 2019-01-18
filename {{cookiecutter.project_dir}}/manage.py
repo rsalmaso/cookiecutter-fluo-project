@@ -1,6 +1,7 @@
 #!/usr/bin/env python3.6
 
-import os, sys
+import os
+import sys
 
 # PATH is the absolute path leading to parent directory
 PATH = os.path.dirname(os.path.realpath(__file__))

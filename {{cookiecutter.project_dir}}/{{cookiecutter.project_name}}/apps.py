@@ -1,8 +1,9 @@
 from django.apps import AppConfig
+from django.contrib.staticfiles.apps import StaticFilesConfig as BaseStaticFilesConfig
+from django.core import checks
 from django.utils.module_loading import import_module
 from django.utils.translation import gettext_lazy as _
 from fluo.apps import FluoAdminConfig
-from django.contrib.staticfiles.apps import StaticFilesConfig as BaseStaticFilesConfig
 
 
 class AdminConfig(FluoAdminConfig):

@@ -14,7 +14,8 @@ framework.
 
 """
 
-import os, sys
+import os
+import sys
 
 # PATH is the absolute path leading to parent directory
 PROJECT_PATH = os.path.split(os.path.realpath(__file__))[0]
@@ -37,7 +38,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{ cookiecutter.project_name }}
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
-from django.core.wsgi import get_wsgi_application
+from django.core.wsgi import get_wsgi_application  # isort:skip
 _application = get_wsgi_application()
 
 def application(environ, start_response):
