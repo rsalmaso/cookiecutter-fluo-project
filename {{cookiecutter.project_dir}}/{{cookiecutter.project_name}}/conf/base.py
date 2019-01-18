@@ -15,28 +15,28 @@ def rel(*args):
     return os.path.normpath(os.path.join(PROJECT_PATH, *args))
 
 
-LIB_DIR = rel("lib")
+LIB_DIR = os.environ.get("LIB_DIR", rel("lib"))
 
 
 def lib_rel(*args):
     return os.path.normpath(os.path.join(LIB_DIR, *args))
 
 
-LOG_DIR = rel("log")
+LOG_DIR = os.environ.get("LOG_DIR", rel("log"))
 
 
 def log_rel(*args):
     return os.path.normpath(os.path.join(LOG_DIR, *args))
 
 
-CONF_DIR = rel("conf")
+CONF_DIR = os.environ.get("CONF_DIR", rel("conf"))
 
 
 def conf_rel(*args):
     return os.path.normpath(os.path.join(CONF_DIR, *args))
 
 
-TMP_DIR = rel("tmp")
+TMP_DIR = os.environ.get("TMP_DIR", rel("tmp"))
 
 
 def tmp_rel(*args):
@@ -82,7 +82,7 @@ SITE_ID = 1
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = rel("media")
+MEDIA_ROOT = os.environ.get("MEDIA_ROOT", rel("media"))
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -93,7 +93,7 @@ MEDIA_URL = "/media/"
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = rel("static")
+STATIC_ROOT = os.environ.get("STATIC_ROOT", rel("static"))
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -369,7 +369,7 @@ THUMBNAIL_PROCESSORS = (
     "filer.thumbnail_processors.scale_and_crop_with_subject_location",
     "easy_thumbnails.processors.filters",
 )
-THUMBNAIL_MEDIA_ROOT = os.path.join(MEDIA_ROOT, "cache")
+THUMBNAIL_MEDIA_ROOT = os.environ.get("THUMBNAIL_MEDIA_ROOT", os.path.join(MEDIA_ROOT, "cache"))
 THUMBNAIL_MEDIA_URL = MEDIA_URL + "cache/"
 # THUMBNAIL_BASEDIR = "cache"
 
