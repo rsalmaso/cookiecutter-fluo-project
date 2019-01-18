@@ -11,6 +11,8 @@ def add(path):
         sys.path.insert(0, PATH_DIR)
 add('lib')
 
+import service_urls.patch  # isort:skip
+
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{ cookiecutter.project_name }}.settings")

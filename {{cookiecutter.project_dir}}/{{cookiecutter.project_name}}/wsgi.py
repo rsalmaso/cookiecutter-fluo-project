@@ -33,6 +33,8 @@ try:
 except ValueError:
     pass
 
+import service_urls.patch  # isort:skip
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{ cookiecutter.project_name }}.settings")
 
 # This application object is used by any WSGI server configured to use this
