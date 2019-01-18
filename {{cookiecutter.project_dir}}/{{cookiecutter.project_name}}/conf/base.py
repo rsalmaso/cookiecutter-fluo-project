@@ -12,11 +12,7 @@ PROJECT_PATH = os.path.split(os.path.split(os.path.split(os.path.realpath(__file
 
 def rel(*args):
     return os.path.normpath(os.path.join(PROJECT_PATH, *args))
-def mkdir(dir):
-    try:
-        os.makedirs(dir)
-    except FileExistsError:
-        pass
+
 
 LIB_DIR = rel("lib")
 def lib_rel(*args):
@@ -30,9 +26,6 @@ def conf_rel(*args):
 TMP_DIR = rel("tmp")
 def tmp_rel(*args):
     return os.path.normpath(os.path.join(TMP_DIR, *args))
-# make sure log and tmp dirs exist
-mkdir(LOG_DIR)
-mkdir(TMP_DIR)
 
 LANGUAGES = [
     ("it", _("Italian")),
@@ -74,7 +67,6 @@ SITE_ID = 1
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = rel("media")
-mkdir(MEDIA_ROOT)
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -86,7 +78,6 @@ MEDIA_URL = "/media/"
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 STATIC_ROOT = rel("static")
-mkdir(STATIC_ROOT)
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
