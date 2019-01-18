@@ -166,6 +166,9 @@ def remove_vuejs_files():
 def remove_postgresql_files():
     os.remove(os.path.join(PROJECT_DIRECTORY, "{{ cookiecutter.project_name }}", "migrations", "0001_initial.py"))
 
+def remove_working_files():
+    os.remove(os.path.join(PROJECT_DIRECTORY, "COPYING.py"))
+
 def init():
     make_secret_key(PROJECT_DIRECTORY)
 
@@ -178,6 +181,7 @@ def init():
         remove_postgresql_files()
     if '{{ cookiecutter.use_vuejs }}'.lower() == 'n':
         remove_vuejs_files()
+    remove_working_files()
     project.collectstatic()
 
 init()
