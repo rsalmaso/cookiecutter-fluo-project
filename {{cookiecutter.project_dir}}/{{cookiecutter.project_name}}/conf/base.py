@@ -4,28 +4,44 @@ Django settings for {{ cookiecutter.project_name }} project.
 
 import getpass
 import os
-from django.urls import reverse_lazy
+# from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 PROJECT_NAME = "{{ cookiecutter.project_name }}"
 PROJECT_PATH = os.path.split(os.path.split(os.path.split(os.path.realpath(__file__))[0])[0])[0]
+
 
 def rel(*args):
     return os.path.normpath(os.path.join(PROJECT_PATH, *args))
 
 
 LIB_DIR = rel("lib")
+
+
 def lib_rel(*args):
     return os.path.normpath(os.path.join(LIB_DIR, *args))
+
+
 LOG_DIR = rel("log")
+
+
 def log_rel(*args):
     return os.path.normpath(os.path.join(LOG_DIR, *args))
+
+
 CONF_DIR = rel("conf")
+
+
 def conf_rel(*args):
     return os.path.normpath(os.path.join(CONF_DIR, *args))
+
+
 TMP_DIR = rel("tmp")
+
+
 def tmp_rel(*args):
     return os.path.normpath(os.path.join(TMP_DIR, *args))
+
 
 LANGUAGES = [
     ("it", _("Italian")),
@@ -89,8 +105,8 @@ STATICFILES_DIRS = [
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 
-    #lib_rel('django', 'contrib', 'admin', 'static'),
-    #lib_rel('fluo', 'static'),
+    # lib_rel('django', 'contrib', 'admin', 'static'),
+    # lib_rel('fluo', 'static'),
 ]
 
 # List of finder classes that know how to find static files in
@@ -98,7 +114,7 @@ STATICFILES_DIRS = [
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    #"django.contrib.staticfiles.finders.DefaultStorageFinder",
+    # "django.contrib.staticfiles.finders.DefaultStorageFinder",
 ]
 
 STATICFILES_STORAGE = os.environ.get("STATICFILES_STORAGE", {% if cookiecutter.use_whitenoise == "y" %}"whitenoise.storage.CompressedManifestStaticFilesStorage"{% else %}"django.contrib.staticfiles.storage.ManifestStaticFilesStorage"{% endif %})
@@ -114,7 +130,7 @@ TEMPLATES = [{
         # Always use forward slashes, even on Windows.
         # Don't forget to use absolute paths, not relative paths.
 
-        #rel("templates"),
+        # rel("templates"),
     ],
     "APP_DIRS": True,
     "OPTIONS": {
@@ -136,7 +152,7 @@ TEMPLATES = [{
 }]
 
 MIDDLEWARE = [
-    #"django.middleware.cache.UpdateCacheMiddleware", # enable cache{% if cookiecutter.project_type == "django-cms" %}
+    # "django.middleware.cache.UpdateCacheMiddleware",  # enable cache{% if cookiecutter.project_type == "django-cms" %}
     "cms.middleware.utils.ApphookReloadMiddleware",{% endif %}
     "django.middleware.security.SecurityMiddleware",{% if cookiecutter.use_whitenoise == "y" %}
     "whitenoise.middleware.WhiteNoiseMiddleware",{% endif %}
@@ -146,21 +162,21 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.locale.LocaleMiddleware",
-    #"django.middleware.http.ConditionalGetMiddleware",
-    #"django.middleware.gzip.GZipMiddleware",
+    # "django.middleware.http.ConditionalGetMiddleware",
+    # "django.middleware.gzip.GZipMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",{% if cookiecutter.project_type == "django-cms" %}
     "cms.middleware.user.CurrentUserMiddleware",
     "cms.middleware.page.CurrentPageMiddleware",
     "cms.middleware.toolbar.ToolbarMiddleware",
     "cms.middleware.language.LanguageCookieMiddleware",{% endif %}
-    #"django.middleware.cache.FetchFromCacheMiddleware", # enable cache
+    # "django.middleware.cache.FetchFromCacheMiddleware",  # enable cache
 ]
 INTERNAL_IPS = ["127.0.0.1"]
 
 ROOT_URLCONF = os.environ.get("ROOT_URLCONF", "{{ cookiecutter.project_name }}.urls")
-#LOGIN_URL = reverse_lazy("login")
-#LOGOUT_URL = reverse_lazy("logout")
-#LOGIN_REDIRECT_URL = "/" #"/accounts/profile/"
+# LOGIN_URL = reverse_lazy("login")
+# LOGOUT_URL = reverse_lazy("logout")
+# LOGIN_REDIRECT_URL = "/" #"/accounts/profile/"
 AUTH_USER_MODEL = "auth.User"
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -225,9 +241,9 @@ LOGGING = {
         "simple": {
             "format": "[%(asctime)s] %(levelname)s %(message)s",
         },
-        'django.server': {
-            '()': 'django.utils.log.ServerFormatter',
-            'format': '[%(server_time)s] %(message)s',
+        "django.server": {
+            "()": "django.utils.log.ServerFormatter",
+            "format": "[%(server_time)s] %(message)s",
         },
     },
     "filters": {
@@ -235,22 +251,22 @@ LOGGING = {
             "()": "django.utils.log.CallbackFilter",
             "callback": lambda r: not DEBUG,
         },
-       #"special": {
-           #"()": "{{ cookiecutter.project_name }}.logging.SpecialFilter",
-           #"foo": "bar",
-       #},
+        # "special": {
+        #    "()": "{{ cookiecutter.project_name }}.logging.SpecialFilter",
+        #    "foo": "bar",
+        # },
     },
     "handlers": {
         "null": {
             "level": "DEBUG",
             "class": "logging.NullHandler",
         },
-        "console":{
+        "console": {
             "level": "DEBUG",
             "class": "logging.StreamHandler",
             "formatter": "verbose",
         },
-        "file":{
+        "file": {
             "level": "INFO",
             "class": "logging.handlers.TimedRotatingFileHandler",
             "formatter": "verbose",
@@ -261,7 +277,7 @@ LOGGING = {
             "delay": True,
             # rotate every 7 days, keep 4 old copies
         },
-        "error_file":{
+        "error_file": {
             "level": "ERROR",
             "class": "logging.handlers.TimedRotatingFileHandler",
             "formatter": "verbose",
@@ -276,13 +292,13 @@ LOGGING = {
             "level": "ERROR",
             "class": "django.utils.log.AdminEmailHandler",
             "include_html": True,
-            #"filters": ["special"]
+            # "filters": ["special"]
             "filters": ["require_debug_false"],
         },
-        'django.server': {
-            'level': 'INFO',
-            'class': 'logging.StreamHandler',
-            'formatter': 'django.server',
+        "django.server": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "django.server",
         },
     },
     "loggers": {
@@ -299,30 +315,46 @@ LOGGING = {
             "level": "ERROR",
             "propagate": False,
         },
-        'django.server': {
-            'handlers': ['django.server'],
-            'level': 'INFO',
-            'propagate': False,
+        "django.server": {
+            "handlers": ["django.server"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "gunicorn.error": {
+            "level": "DEBUG",
+            "handlers": ["console"],
+            "propagate": True
+        },
+        "gunicorn.access": {
+            "level": "DEBUG",
+            "handlers": ["console"],
+            "propagate": False
         },
         "{{ cookiecutter.project_name }}": {
             "handlers": ["console", "file", "error_file", "mail_admins"],
             "level": "INFO",
-            #"filters": ["special"]
+            # "filters": ["special"]
         },
     },
 }
 
-### Cache
+#########
+# Cache #
+#########
 CACHES = {
     "default": "dummy://"
 }
-#CACHE_MIDDLEWARE_KEY_PREFIX = ""
-#CACHE_MIDDLEWARE_SECONDS = 600
-#CACHE_MIDDLEWARE_ALIAS = "default"
+# CACHE_MIDDLEWARE_KEY_PREFIX = ""
+# CACHE_MIDDLEWARE_SECONDS = 600
+# CACHE_MIDDLEWARE_ALIAS = "default"
 
-#DEFAULT_FROM_EMAIL = "webmaster@localhost"
-#EMAIL_SUBJECT_PREFIX = "[Django] "
-#SERVER_EMAIL = "root@localhost"
+##########
+# EMAILS #
+##########
+
+# DEFAULT_FROM_EMAIL = "webmaster@localhost"
+# EMAIL_SUBJECT_PREFIX = "[Django] "
+# SERVER_EMAIL = "root@localhost"
 EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", f"file://{rel('emails')}")
 
 
@@ -333,13 +365,13 @@ EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND", f"file://{rel('emails')}")
 THUMBNAIL_PROCESSORS = (
     "easy_thumbnails.processors.colorspace",
     "easy_thumbnails.processors.autocrop",
-    #"easy_thumbnails.processors.scale_and_crop",
+    # "easy_thumbnails.processors.scale_and_crop",
     "filer.thumbnail_processors.scale_and_crop_with_subject_location",
     "easy_thumbnails.processors.filters",
 )
 THUMBNAIL_MEDIA_ROOT = os.path.join(MEDIA_ROOT, "cache")
 THUMBNAIL_MEDIA_URL = MEDIA_URL + "cache/"
-#THUMBNAIL_BASEDIR = "cache"
+# THUMBNAIL_BASEDIR = "cache"
 
 CMS_TEMPLATES = [
     ("{{ cookiecutter.project_name }}/index.html", _("Home Page (T1)")),
@@ -348,7 +380,7 @@ CMS_PLACEHOLDER_CONF = {
 }
 
 CMS_PERMISSION = False
-#CMS_MODERATOR = True
+# CMS_MODERATOR = True
 CMS_URL_OVERWRITE = True
 CMS_MENU_TITLE_OVERWRITE = True
 CMS_SEO_FIELDS = True
@@ -378,18 +410,18 @@ CMS_SHOW_END_DATE = True
 #######################
 
 AUTH_PASSWORD_VALIDATORS = [
-    #{
-        #'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    #},
-    #{
-        #'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    #},
-    #{
-        #'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    #},
-    #{
-        #'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    #},
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    # },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    # },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    # },
+    # {
+    #     "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    # },
 ]
 {% if cookiecutter.use_djangorestframework == "y" %}
 #########################
@@ -398,14 +430,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        #"rest_framework.authentication.BasicAuthentication", # only for https
+        # "rest_framework.authentication.BasicAuthentication",  # only for https
         "rest_framework.authentication.SessionAuthentication",
-        #"rest_framework.authentication.TokenAuthentication", # only for https
+        # "rest_framework.authentication.TokenAuthentication",  # only for https
     ),
     "DEFAULT_RENDERER_CLASSES": (
         "rest_framework.renderers.JSONRenderer",
-        #"rest_framework.renderers.TemplateHTMLRenderer",
-        #"rest_framework.renderers.BrowsableAPIRenderer",
+        # "rest_framework.renderers.TemplateHTMLRenderer",
+        # "rest_framework.renderers.BrowsableAPIRenderer",
     ),
     "DEFAULT_PARSER_CLASSES": (
         "rest_framework.parsers.JSONParser",
