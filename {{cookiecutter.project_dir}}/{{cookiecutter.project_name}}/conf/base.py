@@ -62,7 +62,7 @@ MANAGERS = ADMINS
 ALLOWED_HOSTS = []
 
 DATABASES = {
-    "default": os.environ.get("DATABASES_DEFAULT", f"postgres://{getpass.getuser()}:@:5432/{{ cookiecutter.db_name }}"),
+    "default": os.environ.get("DATABASES_DEFAULT", os.environ.get("DATABASE_URL", f"postgres://{getpass.getuser()}:@:5432/{{ cookiecutter.db_name }}")),
 }
 
 # Local time zone for this installation. Choices can be found here:
