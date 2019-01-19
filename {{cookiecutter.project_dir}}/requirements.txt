@@ -1,4 +1,5 @@
 pytz
+sqlparse
 django-service-urls
 django{% if cookiecutter.project_type == "django-cms" %} < 2.0.0{% endif %}
 django-fluo >= 0.4.0a5{% if cookiecutter.use_gunicorn == "y" %}
