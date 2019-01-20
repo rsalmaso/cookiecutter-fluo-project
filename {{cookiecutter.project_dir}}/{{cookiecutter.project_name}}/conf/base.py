@@ -63,8 +63,13 @@ DATABASES = {
     "default": os.environ.get("DATABASES_DEFAULT", os.environ.get("DATABASE_URL", f"postgres://{getpass.getuser()}:@:5432/{{ cookiecutter.db_name }}")),
 }
 
-TIME_ZONE = os.environ.get("TIME_ZONE", "Europe/Rome")
+
+USE_I18N = True
+USE_L10N = True
 LANGUAGE_CODE = os.environ.get("LANGUAGE_CODE", "en")
+
+USE_TZ = True
+TIME_ZONE = os.environ.get("TIME_ZONE", "Europe/Rome")
 
 SITE_ID = 1
 
