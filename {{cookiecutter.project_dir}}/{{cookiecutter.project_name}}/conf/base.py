@@ -160,6 +160,7 @@ AUTH_USER_MODEL = "auth.User"
 WSGI_APPLICATION = os.environ.get("WSGI_APPLICATION", "{{ cookiecutter.project_name }}.wsgi.application")
 
 INSTALLED_APPS = [
+    "django_serve.apps.ServeConfig",
     "{{ cookiecutter.project_name }}.apps.{{ cookiecutter.camel_case_app_name }}Config",
 
     {% if cookiecutter.use_postgresql == "y" %}"django.contrib.postgres.apps.PostgresConfig",
