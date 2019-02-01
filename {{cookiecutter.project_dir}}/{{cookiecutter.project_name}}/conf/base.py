@@ -49,7 +49,7 @@ LANGUAGES = [
 ]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get("DEBUG", "false").lower() in ("true", "1")
 
 ADMINS = [
     # ('Your Name', 'your_email@example.com'),
@@ -57,7 +57,7 @@ ADMINS = [
 
 MANAGERS = ADMINS
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 
 DATABASES = {
     "default": os.environ.get("DATABASES_DEFAULT", os.environ.get("DATABASE_URL", f"postgres://{getpass.getuser()}:@:5432/{{ cookiecutter.db_name }}")),
@@ -74,10 +74,11 @@ TIME_ZONE = os.environ.get("TIME_ZONE", "Europe/Rome")
 SITE_ID = 1
 
 MEDIA_ROOT = os.environ.get("MEDIA_ROOT", rel("media"))
-MEDIA_URL = "/media/"
+MEDIA_URL = os.environ.get("MEDIA_URL", "/media/")
 
 STATIC_ROOT = os.environ.get("STATIC_ROOT", rel("static"))
-STATIC_URL = "/static/"
+STATIC_HOST = os.environ.get("STATIC_HOST", "")
+STATIC_URL = os.environ.get("STATIC_URL", STATIC_HOST + "/static/")
 
 # Additional locations of static files
 STATICFILES_DIRS = [
@@ -96,6 +97,7 @@ STATICFILES_FINDERS = [
 ]
 
 STATICFILES_STORAGE = os.environ.get("STATICFILES_STORAGE", {% if cookiecutter.use_whitenoise == "y" %}"whitenoise.storage.CompressedManifestStaticFilesStorage"{% else %}"django.contrib.staticfiles.storage.ManifestStaticFilesStorage"{% endif %})
+FILE_UPLOAD_PERMISSIONS = 0o644
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # Make this unique, and don't share it with anybody.
@@ -315,7 +317,7 @@ LOGGING = {
 # Cache #
 #########
 CACHES = {
-    "default": "dummy://"
+    "default": os.environ.get("CACHES_DEFAULT", "dummy://"),
 }
 # CACHE_MIDDLEWARE_KEY_PREFIX = ""
 # CACHE_MIDDLEWARE_SECONDS = 600
@@ -343,7 +345,7 @@ THUMBNAIL_PROCESSORS = (
     "easy_thumbnails.processors.filters",
 )
 THUMBNAIL_MEDIA_ROOT = os.environ.get("THUMBNAIL_MEDIA_ROOT", os.path.join(MEDIA_ROOT, "cache"))
-THUMBNAIL_MEDIA_URL = MEDIA_URL + "cache/"
+THUMBNAIL_MEDIA_URL = os.environ.get("THUMBNAIL_MEDIA_URL", MEDIA_URL + "cache/")
 # THUMBNAIL_BASEDIR = "cache"
 
 CMS_TEMPLATES = [
