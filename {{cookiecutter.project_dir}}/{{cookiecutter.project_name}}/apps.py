@@ -1,11 +1,8 @@
 from django.apps import AppConfig
 from django.contrib.staticfiles.apps import StaticFilesConfig as BaseStaticFilesConfig
-from django.core import checks
 from django.utils.module_loading import import_module
 from django.utils.translation import gettext_lazy as _
 from fluo.apps import FluoAdminConfig
-
-from .checks import check_dirs
 
 
 class AdminConfig(FluoAdminConfig):
@@ -19,9 +16,6 @@ class AdminConfig(FluoAdminConfig):
 class {{ cookiecutter.camel_case_app_name }}Config(AppConfig):
     name = "{{ cookiecutter.project_name }}"
     verbose_name = _("{{ cookiecutter.camel_case_app_name }}")
-
-    def ready(self):
-        checks.register(check_dirs)
 
 
 class StaticFilesConfig(BaseStaticFilesConfig):
