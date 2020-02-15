@@ -199,7 +199,6 @@ INSTALLED_APPS = [
     "djangocms_link",
     "djangocms_picture",
     "djangocms_style",
-    "djangocms_teaser",
     "djangocms_video",
 
     "filer",{% endif %}{% if cookiecutter.use_cookielaw == "y" %}

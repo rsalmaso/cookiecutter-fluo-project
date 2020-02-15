@@ -23,7 +23,6 @@ djangocms-googlemap
 djangocms-link
 djangocms-picture
 djangocms-style
-djangocms-teaser
 djangocms-text-ckeditor
 djangocms-video
 django-polymorphic
