@@ -1,5 +1,5 @@
 {% raw %}{% extends "{% endraw %}{{ cookiecutter.project_name }}{% raw %}/template.html" %}
-{% load i18n media_tags staticfiles {% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}cms_tags {% endraw %}{% endif %}{% if cookiecutter.project_type == "django-cms" or cookiecutter.use_sekizai == "y" %}{% raw %}sekizai_tags {% endraw %}{% endif %}{% raw %}%}
+{% load i18n media_tags static {% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}cms_tags {% endraw %}{% endif %}{% if cookiecutter.project_type == "django-cms" or cookiecutter.use_sekizai == "y" %}{% raw %}sekizai_tags {% endraw %}{% endif %}{% raw %}%}
 
 {% block title %}Title{% endblock %}
 
