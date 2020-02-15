@@ -60,9 +60,14 @@ MANAGERS = ADMINS
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 
 DATABASES = {
-    "default": os.environ.get("DATABASES_DEFAULT", os.environ.get("DATABASE_URL", f"postgres://{getpass.getuser()}:@:5432/{{ cookiecutter.db_name }}")),
+    "default": os.environ.get("DATABASE_URL", "postgres://{user}:{password}@{host}:{port}/{name}".format(
+        name=os.environ.get("DATABASE_NAME", "{{ cookiecutter.db_name }}"),
+        user=os.environ.get("DATABASE_USER", getpass.getuser()),
+        host=os.environ.get("DATABASE_HOST", ""),
+        port=os.environ.get("DATABASE_PORT", "5432"),
+        password=os.environ.get("DATABASE_PASSWORD", ""),
+    )),
 }
-
 
 USE_I18N = True
 USE_L10N = True
