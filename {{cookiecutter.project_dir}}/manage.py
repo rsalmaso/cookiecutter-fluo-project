@@ -11,7 +11,7 @@ def add(path):
         sys.path.insert(0, PATH_DIR)
 add('lib')
 
-import service_urls.patch  # isort:skip
+import service_urls.patch  # noqa: F401 isort:skip
 
 
 if __name__ == "__main__":

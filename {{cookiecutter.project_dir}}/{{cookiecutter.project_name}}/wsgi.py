@@ -33,7 +33,7 @@ try:
 except ValueError:
     pass
 
-import service_urls.patch  # isort:skip
+import service_urls.patch  # noqa: F401 isort:skip
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{ cookiecutter.project_name }}.settings")
 
