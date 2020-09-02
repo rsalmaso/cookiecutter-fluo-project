@@ -1,0 +1,2 @@
+graft {{ cookiecutter.project_name }}
+incluce MAINFEST.in
