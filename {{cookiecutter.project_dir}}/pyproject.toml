@@ -1,10 +1,20 @@
 [tool.black]
-line-length = 120
-target-version = ['py36']
+include = '\.pyi?$'
 exclude = '''
 /(
-  migrations
-  | __pycache__
+  __pycache__
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | etc
+  | _build
+  | migrations
+  | build
+  | dist
 )/
 '''
+line-length = 120
 safe = true
+target-version = ['py38']
