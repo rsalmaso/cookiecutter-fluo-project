@@ -25,12 +25,15 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{ cookiecutter.project_name }}
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
 from django.core.wsgi import get_wsgi_application  # isort:skip
+
 _application = get_wsgi_application()
 
+
 def application(environ, start_response):
-    if environ['wsgi.url_scheme'] == 'https':
-        environ['HTTPS'] = 'on'
+    if environ["wsgi.url_scheme"] == "https":
+        environ["HTTPS"] = "on"
     return _application(environ, start_response)
+
 
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication
