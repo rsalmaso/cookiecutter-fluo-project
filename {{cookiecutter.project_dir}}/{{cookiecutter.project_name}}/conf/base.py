@@ -120,8 +120,8 @@ TEMPLATES = [{
             "django.template.context_processors.tz",
             "django.contrib.auth.context_processors.auth",
             "django.contrib.messages.context_processors.messages",{% if cookiecutter.project_type == "django-cms" %}
-            "cms.context_processors.cms_settings",{% endif %}{% if cookiecutter.use_sekizai == "y" or cookiecutter.project_type == "django-cms" %}
-            "sekizai.context_processors.sekizai",{% endif %}
+            "cms.context_processors.cms_settings",{% endif %}
+            "sekizai.context_processors.sekizai",
         ],
         "builtins": [
             "fluo.templatetags.backports",
@@ -176,10 +176,10 @@ INSTALLED_APPS = [
     "sorl.thumbnail",{% endif %}{% if cookiecutter.use_djangorestframework == "y" %}
 
     "rest_framework",
-    "rest_framework.authtoken",{% endif %}{% if cookiecutter.use_sekizai == "y" or cookiecutter.project_type == "django-cms" %}
+    "rest_framework.authtoken",{% endif %}
 
     "{{ cookiecutter.project_name }}.apps.ClassyTagsConfig",
-    "{{ cookiecutter.project_name }}.apps.SekizaiConfig",{% endif %}{% if cookiecutter.use_widget_tweaks == "y" or cookiecutter.project_type == "django-cms" %}
+    "{{ cookiecutter.project_name }}.apps.SekizaiConfig",{% if cookiecutter.use_widget_tweaks == "y" or cookiecutter.project_type == "django-cms" %}
     "{{ cookiecutter.project_name }}.apps.WidgetTweaksConfig",{% endif %}{% if cookiecutter.project_type == "django-cms" %}
 
     "mptt",

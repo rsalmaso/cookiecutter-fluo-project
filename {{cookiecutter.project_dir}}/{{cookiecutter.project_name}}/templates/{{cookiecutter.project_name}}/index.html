@@ -1,11 +1,10 @@
 {% raw %}{% extends "{% endraw %}{{ cookiecutter.project_name }}{% raw %}/template.html" %}
-{% load i18n media_tags static {% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %}cms_tags {% endraw %}{% endif %}{% if cookiecutter.project_type == "django-cms" or cookiecutter.use_sekizai == "y" %}{% raw %}sekizai_tags {% endraw %}{% endif %}{% raw %}%}
+{% load i18n media_tags static sekizai_tags{% endraw %}{% if cookiecutter.project_type == "django-cms" %}{% raw %} cms_tags {% endraw %}{% endif %}{% raw %}%}
 
 {% block title %}Title{% endblock %}
 
-{% block extra-css %}{% endraw %}{% if cookiecutter.project_type == "django-cms" or cookiecutter.use_sekizai == "y" %}{% raw %}
-{% addtoblock "css" %}{% endraw %}{% else %}{% raw %}
-{{ block.super }}{% endraw %}{% endif %}{% raw %}
+{% block extra-css %}
+{% addtoblock "css" %}
 <style>
   body { text-align: center;}
   h1 { font-size: 50px; text-align: center }
@@ -17,8 +16,8 @@
 
   a { color: rgb(36, 109, 56); text-decoration:none; }
   a:hover { color: rgb(96, 73, 141) ; text-shadow: 2px 2px 2px rgba(36, 109, 56, 0.5); }
-</style>{% endraw %}{% if cookiecutter.project_type == "django-cms" or cookiecutter.use_sekizai == "y" %}{% raw %}
-{% endaddtoblock %}{% endraw %}{% endif %}{% raw %}
+</style>
+{% endaddtoblock %}
 {% endblock %}
 
 {% block main %}
