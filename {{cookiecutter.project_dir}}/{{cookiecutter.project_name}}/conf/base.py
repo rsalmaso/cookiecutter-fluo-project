@@ -15,13 +15,6 @@ def rel(*args):
     return os.path.normpath(os.path.join(PROJECT_PATH, *args))
 
 
-LIB_DIR = os.environ.get("LIB_DIR", rel("lib"))
-
-
-def lib_rel(*args):
-    return os.path.normpath(os.path.join(LIB_DIR, *args))
-
-
 LOG_DIR = os.environ.get("LOG_DIR", rel("log"))
 
 

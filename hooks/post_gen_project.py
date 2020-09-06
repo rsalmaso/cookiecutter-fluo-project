@@ -24,20 +24,19 @@ import os
 import random
 import shutil
 import subprocess
+import time
 
 PYTHON = os.environ.get("PYTHON", "python3")
+VENV_NAME = "{}.{}".format("{{ cookiecutter.project_dir }}", str(time.time()).split('.')[0])
+VENV_PATH = f"/tmp/{VENV_NAME}"
+VENV_PIP = f"{VENV_PATH}/bin/pip"
+VENV_PYTHON = f"{VENV_PATH}/bin/python3"
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
-LIB_DIR = os.path.join(PROJECT_DIRECTORY, "lib")
-PATCHES_DIR = os.path.join(PROJECT_DIRECTORY, "_patches")
-REMOVE_DIRS = [
-    "PIL", "Pillow*dist-info",
-    "lxml", "lxml*dist-info",
-]
 
 @contextlib.contextmanager
-def cd(path):
+def cd(VENV_PATH):
     cwd = os.getcwd()
-    os.chdir(path)
+    os.chdir(VENV_PATH)
     yield
     os.chdir(cwd)
 
@@ -52,23 +51,40 @@ class Project:
             directory,
         ))
 
-    def install_libs(self):
-        self.mkdir("lib")
-        cmd = [
-            "/usr/bin/env",
+    def create_venv(self):
+        system(
             PYTHON,
             "-m",
-            "pip",
+            "venv",
+            VENV_PATH
+        )
+        system(
+            VENV_PIP,
             "install",
-            "--target={}".format(LIB_DIR),
-            "-r", "requirements.txt",
-        ]
-        subprocess.call(cmd)
+            "--upgrade",
+            "pip",
+            "wheel",
+            "setuptools",
+            "pip-tools",
+        )
+
+    def install_libs(self):
+        system(
+            VENV_PYTHON,
+            "-m",
+            "piptools",
+            "compile",
+        )
+        system(
+            VENV_PYTHON,
+            "-m",
+            "piptools",
+            "sync",
+        )
 
     def collectstatic(self):
         system(
-            "/usr/bin/env",
-            PYTHON,
+            VENV_PYTHON,
             os.path.join(PROJECT_DIRECTORY, "manage.py"),
             "collectstatic",
             "--noinput",
@@ -128,29 +144,6 @@ def make_secret_key(project_directory):
         "base.py",
     ))
 
-def apply_patches():
-    with cd(LIB_DIR):
-        libs = [lib for lib in os.listdir(LIB_DIR) if os.path.isdir(lib) and not lib.endswith(".dist-info") and lib != "__pycache__"]
-        patches = [patch for patch in os.listdir(PATCHES_DIR) if patch.endswith(".diff")]
-        for patch in patches:
-            lib = patch.split(".")[0]
-            if lib in libs:
-                os.chdir(os.path.join(LIB_DIR, lib))
-                system("patch", "-p1", "-i", os.path.join(PATCHES_DIR, patch))
-
-def cleanup_patches():
-    if os.path.exists(PATCHES_DIR):
-        shutil.rmtree(PATCHES_DIR)
-
-def cleanup_libs():
-    with cd(LIB_DIR):
-        dirs = []
-        for path in REMOVE_DIRS:
-            dirs.extend(glob.glob(path))
-        for path in dirs:
-            if os.path.exists(path):
-                shutil.rmtree(path)
-
 def remove_vuejs_files():
     path = os.path.join(
         PROJECT_DIRECTORY,
@@ -173,10 +166,8 @@ def init():
     make_secret_key(PROJECT_DIRECTORY)
 
     project = Project()
+    project.create_venv()
     project.install_libs()
-    apply_patches()
-    cleanup_patches()
-    cleanup_libs()
     if '{{ cookiecutter.use_postgresql }}'.lower() == 'n':
         remove_postgresql_files()
     if '{{ cookiecutter.use_vuejs }}'.lower() == 'n':

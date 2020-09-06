@@ -3,14 +3,6 @@
 import os
 import sys
 
-# PATH is the absolute path leading to parent directory
-PATH = os.path.dirname(os.path.realpath(__file__))
-def add(path):
-    PATH_DIR = os.path.join(PATH, path)
-    if PATH_DIR not in sys.path:
-        sys.path.insert(0, PATH_DIR)
-add('lib')
-
 import service_urls.patch  # noqa: F401 isort:skip
 
 

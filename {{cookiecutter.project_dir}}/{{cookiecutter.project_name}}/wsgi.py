@@ -17,22 +17,6 @@ framework.
 import os
 import sys
 
-# PATH is the absolute path leading to parent directory
-PROJECT_PATH = os.path.split(os.path.realpath(__file__))[0]
-PATH = os.path.split(PROJECT_PATH)[0]
-LIB_DIR = os.path.join(PATH, 'lib')
-
-if LIB_DIR not in sys.path:
-    sys.path.insert(0, LIB_DIR)
-if PATH not in sys.path:
-    sys.path.insert(0, PATH)
-
-# remove current path
-try:
-    sys.path.remove(PROJECT_PATH)
-except ValueError:
-    pass
-
 import service_urls.patch  # noqa: F401 isort:skip
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{ cookiecutter.project_name }}.settings")
