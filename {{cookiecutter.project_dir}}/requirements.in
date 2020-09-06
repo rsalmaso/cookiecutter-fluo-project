@@ -7,8 +7,8 @@ django{% if cookiecutter.use_postgresql == "y" %}
 psycopg2{% endif %}
 django-fluo
 gunicorn{% if cookiecutter.use_cookielaw == "y" %}
-django-fluo-legal{% endif %}{% if cookiecutter.use_whitenoise == "y" %}
-whitenoise{% endif %}{% if cookiecutter.use_sekizai == "y" or cookiecutter.project_type == "django-cms" %}
+django-fluo-legal{% endif %}
+whitenoise[brotli]{% if cookiecutter.use_sekizai == "y" or cookiecutter.project_type == "django-cms" %}
 django-sekizai{% endif %}{% if cookiecutter.use_widget_tweaks == "y" or cookiecutter.project_type == "django-cms" %}
 django-widget-tweaks{% endif %}{% if cookiecutter.use_sorl_thumbnail == "y" %}
 sorl-thumbnail{% endif %}{% if cookiecutter.use_djangorestframework == "y" %}

@@ -27,7 +27,6 @@
     "use_djangorestframework": "y",
     "use_sorl_thumbnail": "y",
     "use_sekizai": "y",
-    "use_whitenoise": "y",
     "use_widget_tweaks": "y",
     "use_vuejs": "y",
     "use_postgresql": "y",
