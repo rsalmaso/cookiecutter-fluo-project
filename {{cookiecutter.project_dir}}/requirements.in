@@ -5,8 +5,8 @@ django-serve
 django-service-urls
 django{% if cookiecutter.use_postgresql == "y" %}
 psycopg2{% endif %}
-django-fluo{% if cookiecutter.use_gunicorn == "y" %}
-gunicorn{% endif %}{% if cookiecutter.use_cookielaw == "y" %}
+django-fluo
+gunicorn{% if cookiecutter.use_cookielaw == "y" %}
 django-fluo-legal{% endif %}{% if cookiecutter.use_whitenoise == "y" %}
 whitenoise{% endif %}{% if cookiecutter.use_sekizai == "y" or cookiecutter.project_type == "django-cms" %}
 django-sekizai{% endif %}{% if cookiecutter.use_widget_tweaks == "y" or cookiecutter.project_type == "django-cms" %}
