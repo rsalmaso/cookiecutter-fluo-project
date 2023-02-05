@@ -62,6 +62,8 @@ DATABASES = {
     )),
 }
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'  # Default primary key field type
+
 USE_I18N = True
 USE_L10N = True
 LANGUAGE_CODE = os.environ.get("LANGUAGE_CODE", "en")
