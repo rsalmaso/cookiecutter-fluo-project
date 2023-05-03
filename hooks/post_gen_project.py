@@ -74,6 +74,8 @@ class Project:
             "-m",
             "piptools",
             "compile",
+            "--annotation-style",
+            "line"
         )
         system(
             VENV_PYTHON,
