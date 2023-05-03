@@ -1,5 +1,6 @@
 pip-tools
 pillow
+python-readenv
 lxml
 django-serve
 django-service-urls
