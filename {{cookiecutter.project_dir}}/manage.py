@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
-import os
-import sys
-
 import service_urls.patch  # noqa: F401 isort:skip
 
+import os
+import sys
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{ cookiecutter.project_name }}.settings")

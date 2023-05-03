@@ -1,7 +1,7 @@
+import service_urls.patch  # noqa: F401 isort:skip
 
 import os
 
-import service_urls.patch  # noqa: F401 isort:skip
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{ cookiecutter.project_name }}.settings")
